@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">    
 
     <!-- Scripts -->
     <script>
@@ -22,7 +22,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top navbar-custom">
             <div class="container">
                 <div class="navbar-header">
 
@@ -36,7 +36,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        Bridge Club
                     </a>
                 </div>
 
@@ -53,13 +53,29 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
+                            <ul class="nav navbar-nav navbar-right">
+                              <li class="hidden">
+                                    <a href="#page-top"></a>
+                                </li>
+                                <li class="page-scroll">
+                                    <a href="/home">Home</a>
+                                </li>
+                                <li class="page-scroll">
+                                    <a href="">LOCATIONS-NEWS-INFORMATION</a>
+                                </li>
+                                <li class="page-scroll">
+                                    <a href="mail-profile.html">PROFILE</a>
+                                </li>
+                                <li class="page-scroll">
+                                    <a href="classes.html">CLASSES</a>
+                                </li>
+                                <li class="page-scroll">
+                                    <a href="">GAMES</a>
+                                </li>
+                                <li class="page-scroll">
+                                    <a href="contact.html">CONTACT</a>
+                                </li>
+                                  <li class="page-scroll">
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -70,8 +86,7 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
-                                </ul>
-                            </li>
+                            </ul>
                         @endif
                     </ul>
                 </div>
