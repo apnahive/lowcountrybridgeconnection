@@ -21,15 +21,22 @@
                         <div class="col-md-2">#</div>
                         <div class="col-md-3">Class Name</div>
                         <div class="col-md-3">Class Starts From</div>
-                        <div class="col-md-3" style="text-align: center;">Edit</div>
+                        <div class="col-md-3" style="text-align: center;">
+                            <div class="col-md-6">Edit</div> 
+                            <div class="col-md-6">View</div> 
+                        </div>
                     </div>
                     @foreach ($classes as $classkey => $value) 
                     <div class="row" style="margin-top: 15px;">
                         <div class="col-md-2">{{ $value->id }}</div>
                         <div class="col-md-3">{{ $value->class_name }}</div>
                         <div class="col-md-3">{{ $value->class_from }}</div>
-                        <div class="col-md-3" style="text-align: center;"><a href="/classes/edit/{{ $value->id }}"><button type="button" class="btn btn-priamry">Edit</button></a></div>
-                    </div>                    
+                        <div class="col-md-3" style="text-align: center">
+                            <div class="col-md-6"><a href="/classes/edit/{{ $value->id }}"><button type="button" class="btn btn-priamry">Edit</button></a></div> 
+                            <div class="col-md-6"><a href="/classes/{{ $value->id }}"><button type="button" class="btn btn-priamry">Veiw</button></a></div>                            
+                            
+                        </div>
+                    </div>                                        
                     @endforeach 
                     
                 </div>

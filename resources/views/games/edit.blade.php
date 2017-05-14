@@ -12,11 +12,12 @@
 <div class="container" style="margin-top: 60px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
+            <a href="/classes/"><button type="button" class="btn btn-lg btn-info">Back</button></a>            
+            <div class="panel panel-default" style="margin-top: 30px;">
                 <div class="panel-heading">Edit Class</div>
                 <div class="panel-body">
                
-                    <form class="form-horizontal" role="form" method="PATCH" action="/classes/{{$classes->id}}">
+                    <form class="form-horizontal" role="form" method="PUT" action="{{ route('classes.update', $classes['id'])}}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('class_name') ? ' has-error' : '' }}">

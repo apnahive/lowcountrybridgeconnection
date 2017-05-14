@@ -14,9 +14,8 @@
 <div class="container" style="margin-top: 60px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <a href="/teacher"><button type="button" class="btn btn-lg btn-info">Back</button></a>
-            <a href="/classes/create" class="pull-right"><button type="button" class="btn btn-lg btn-info pull-right">Add a new class</button></a>
-            <div class="panel panel-default">            
+            <a href="/teacher"><button type="button" class="btn btn-lg btn-info">Back</button></a>            
+            <div class="panel panel-default" style="margin-top: 30px;">            
                 <div class="panel-heading">Create Class</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('classes.store') }}">

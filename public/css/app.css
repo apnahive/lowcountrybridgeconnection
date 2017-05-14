@@ -505,3 +505,10 @@ a.list-group-item {
     margin-left: 4px!important;
 }
 }
+
+/* show page Css */
+.showdata {
+	text-align: right;
+    font-size: 19px;
+    font-weight: 500;
+}

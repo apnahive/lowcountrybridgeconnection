@@ -85,7 +85,8 @@ class ClassroomController extends Controller
      */
     public function show($id)    
     {
-       
+        //$classes as $classkey => $value
+       return view('classes.show', ['classes' => Classroom::findOrFail($id)]);
         //
     }
 

@@ -45,6 +45,7 @@ Route::resource('clubs', 'ClubController');
 Route::resource('workshops', 'WorkshopController');
 
 Route::get('/classes/edit/{class1}', 'ClassroomController@edit');
+//Route::get('/classes/show/{id}', 'ClassroomController@edit');
 
 //Route::resource('classes', 'ClassroomController', ['only' => [
 //    'index', 'show', 'edit'
