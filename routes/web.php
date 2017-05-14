@@ -18,6 +18,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/classlist', 'HomeController@showClass')->name('classlist');
+Route::get('/gamelist', 'HomeController@showGame')->name('gamelist');
+Route::get('/profile', 'HomeController@showProfile')->name('profile');
+Route::get('/contact', 'HomeController@showContact')->name('contact');
+Route::get('/news', 'HomeController@showNews')->name('news');
+
 Route::get('/manager', 'ManagerController@index')->name('manager');
 Route::get('/email', 'HomeController@email')->name('sendEmail');
 Route::get('/superadmin/login', 'SuperAdminLoginController@showLoginForm')->name('superadmin.login');
@@ -32,3 +38,16 @@ Route::get('/teacher', 'TeacherController@index')->name('teacher');
 Route::get('/manager/login', 'ManagerLoginController@showLoginForm')->name('manager.login');
 Route::post('/manager/login', 'ManagerLoginController@login')->name('manager.login.submit');
 Route::get('/manager', 'ManagerController@index')->name('manager');
+Route::resource('profiles', 'ProfileController');
+Route::resource('classes', 'ClassroomController');
+Route::resource('games', 'GameController');
+Route::resource('clubs', 'ClubController');
+Route::resource('workshops', 'WorkshopController');
+
+Route::get('/classes/edit/{class1}', 'ClassroomController@edit');
+
+//Route::resource('classes', 'ClassroomController', ['only' => [
+//    'index', 'show', 'edit'
+//]]);
+
+

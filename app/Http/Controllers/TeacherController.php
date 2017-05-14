@@ -17,10 +17,10 @@ class TeacherController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the application dashboard. 
      *
      * @return \Illuminate\Http\Response
-     */
+     */   
     public function index()
     {
         return view('teacher');

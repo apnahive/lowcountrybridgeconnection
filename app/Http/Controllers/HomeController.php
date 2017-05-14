@@ -34,5 +34,31 @@ class HomeController extends Controller
         Mail::to(Auth::user()->email)->send(new NewUserWelcome());
         return redirect('/home');
     }
+
+    public function showClass()
+    {
+        return view('classes');
+    }
+
+    public function showGame()
+    {
+        return view('games');
+    }
+
+    public function showContact()
+    {
+        return view('contact');
+    }
+
+    public function showProfile()
+    {
+        return view('profile');
+    }
+
+    public function showNews()
+    {
+        return view('news');
+    }
+
 }
 

@@ -30,7 +30,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Home Hilton Head Island</td>
+                                <td>Hilton Head Island</td>
                                 <td>
                                     <button type="button" class="btn btn-info">HHI Bridge Center</button>
                                 </td>
@@ -42,27 +42,33 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>fripp island bridge club</td>
+                                <td>Fripp island bridge club</td>
+                                <td>
+                                    <button type="button" class="btn btn-info">fripp island bridge club</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Cypress duplicate </td>
                                 <td>
                                     <button type="button" class="btn btn-info">Cypress</button>
                                 </td>
                             </tr>
                             <tr>
-                                <td>cypress duplicate </td>
+                                <td>Dataw island bridge clube </td>
                                 <td>
                                     <button type="button" class="btn btn-info">Dataw</button>
                                 </td>
                             </tr>
                             <tr>
-                                <td>dataw island bridge clube </td>
+                                <td>Beaufort bridge club </td>
                                 <td>
                                     <button type="button" class="btn btn-info">Beaufort Bridge Club</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>beaufort bridge club </td>
+							 <tr>
+                                <td>Belfair bridge club </td>
                                 <td>
-                                    <button type="button" class="btn btn-info">Beaufort Bridge Club</button>
+                                    <button type="button" class="btn btn-info">Belfair bridge club</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -78,12 +84,12 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">User Dashboard</div>
+                <div class="panel-heading">Member Dashboard</div>
 
                 
 
                 
-                    <p>You are logged in as <strong>USER</strong>!</p>
+                    <p>You are logged in as <strong>Member</strong>!</p>
                     <a href="{{route('sendEmail')}}" class="btn btn-block btn-primary">Send Email</a>
 
                 

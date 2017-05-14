@@ -128,6 +128,7 @@ header .header-content .header-content-inner p {
 }
 body {
 	font-family: 'Work Sans', sans-serif !important;
+	background-color: #ffffff!important;
 }
 
 /* for below register today section  */
@@ -156,7 +157,8 @@ footer {
 }
 
 .navbar-custom {
-    background: #2C3E50;
+    background: #2C3E50!important;
+    border: 0!important;
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     font-weight: 700;
@@ -265,4 +267,241 @@ hr.star-primary:after {
     top: -0.8em;
     font-size: 2em;
     padding: 0 0.25em;
+}
+
+
+/* Teacher page */
+
+header.teacher {
+    background-image:  url(../img/teachlearn.jpg);
+    background-repeat: no-repeat;
+    text-align: center;
+    color: white;
+    background-size: cover;
+}
+.teacher .container {
+    padding-top: 250px;
+    padding-bottom: 250px;
+    margin-top: -40px;
+}
+
+
+/* Classes page */
+header.classes {
+	background-image:  url(../img/classes.jpg);
+    background-repeat: no-repeat;
+    text-align: center;
+    color: white;
+    background-size: cover;
+}
+.classes .container {
+    padding-top: 250px;
+    padding-bottom: 250px;
+    margin-top: -40px;
+}
+
+.sp {
+    padding: 9px;
+    margin-left: 39px;
+}
+
+.padleft {
+    padding-left: 0!important;
+}
+fieldset {
+    margin-bottom: 40px!important;
+}
+
+
+.mid-section {
+    text-align: center;
+    margin: 0 15%;
+}
+
+.sapce1 {
+    margin-bottom: 12px;
+    text-align: left;
+}
+.full1 {
+    width: 100%;
+}	
+
+
+/* Profile page  */
+
+
+/*  bhoechie tab */
+div.bhoechie-tab-container{
+  z-index: 10;
+  background-color: #ffffff;
+  padding: 0 !important;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  border:1px solid #ddd;
+  margin-top: 20px;
+  margin-left: 50px;
+  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  -moz-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  background-clip: padding-box;
+  opacity: 0.97;
+  filter: alpha(opacity=97);
+}
+div.bhoechie-tab-menu{
+  padding-right: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+}
+div.bhoechie-tab-menu div.list-group{
+  margin-bottom: 0;
+}
+div.bhoechie-tab-menu div.list-group>a{
+  margin-bottom: 0;
+}
+div.bhoechie-tab-menu div.list-group>a .glyphicon,
+div.bhoechie-tab-menu div.list-group>a .fa {
+  color: #5A55A3;
+}
+div.bhoechie-tab-menu div.list-group>a:first-child{
+  border-top-right-radius: 0;
+  -moz-border-top-right-radius: 0;
+}
+div.bhoechie-tab-menu div.list-group>a:last-child{
+  border-bottom-right-radius: 0;
+  -moz-border-bottom-right-radius: 0;
+}
+div.bhoechie-tab-menu div.list-group>a.active,
+div.bhoechie-tab-menu div.list-group>a.active .glyphicon,
+div.bhoechie-tab-menu div.list-group>a.active .fa{
+  background-color: #5A55A3;
+  background-image: #5A55A3;
+  color: #ffffff;
+}
+div.bhoechie-tab-menu div.list-group>a.active:after{
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  margin-top: -13px;
+  border-left: 0;
+  border-bottom: 13px solid transparent;
+  border-top: 13px solid transparent;
+  border-left: 10px solid #5A55A3;
+}
+
+div.bhoechie-tab-content{
+  background-color: #ffffff;
+  /* border: 1px solid #eeeeee; */
+  padding-left: 20px;
+  padding-top: 10px;
+}
+
+div.bhoechie-tab div.bhoechie-tab-content:not(.active){
+  display: none;
+}
+
+
+
+header.profile1 {
+	background-image:  url(../img/home_section.jpg);
+    background-repeat: no-repeat;
+    text-align: center;
+    color: white;
+    background-size: cover;
+}
+.profile1 .container {
+    padding-top: 250px;
+    padding-bottom: 250px;
+    margin-top: -40px;
+}
+
+/* for the menu */
+a.navbar-brand {
+    color: #ffffff!important;
+}
+li.page-scroll a {
+    color: white!important;
+}
+
+
+/* For the check boxes */
+input[type=checkbox] { 
+    margin-left: 0!important;
+}
+.checkbox.checkbox-inline {
+    padding-left: 0!important;
+}
+.bhoechie-tab {
+    overflow: hidden;
+}
+
+
+
+/* For the games page */
+
+header.games {
+    background-image:  url(../img/games.jpg);
+    background-repeat: no-repeat;
+    text-align: center;
+    color: white;
+    background-size: cover;
+}
+.games .container {
+    padding-top: 250px;
+    padding-bottom: 250px;
+    margin-top: -40px;
+}
+.mid-section1 {
+    text-align: left;
+    margin: 0 15%;
+    margin-top: 28px;
+    margin-bottom: 35px;
+}
+
+/* For Classes page button alignment */
+
+.right1 {
+    text-align: right;
+}
+
+h5 {
+    font-size: 14px;
+}
+.sport1 {
+	margin-top: 3px;
+}
+
+
+/* Media query for profile page */
+
+@media (max-width: 734px) {
+.full1 {
+    text-align: center;
+	margin-left: 0px!important;
+}
+
+/* Add this class to list */
+.listmob {
+    text-align: left;
+}
+.bhoechie-tab-container {
+    margin-left: 0!important;
+    width: 100%!important;
+}
+.bhoechie-tab-menu {
+    width: 30%;
+}
+.bhoechie-tab {
+    width: 70%;
+}
+a.list-group-item {
+    padding: 0;
+}
+.padleft1 {
+    padding-left: 0!important;
+}
+.pull-right1 {
+    float: left!important;
+    margin-left: 4px!important;
+}
 }

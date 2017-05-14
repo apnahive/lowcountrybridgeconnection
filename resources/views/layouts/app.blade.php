@@ -8,10 +8,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Bridge Club</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">    
+    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- Scripts -->
     <script>
@@ -58,27 +60,27 @@
                                     <a href="#page-top"></a>
                                 </li>
                                 <li class="page-scroll">
-                                    <a href="/home">Home</a>
+                                    <a href="{{ route('home') }}">Home</a>
                                 </li>
                                 <li class="page-scroll">
-                                    <a href="">LOCATIONS-NEWS-INFORMATION</a>
+                                    <a href="{{ route('news') }}">LOCATIONS-NEWS-INFORMATION</a>
                                 </li>
                                 <li class="page-scroll">
-                                    <a href="mail-profile.html">PROFILE</a>
+                                    <a href="{{ route('profile') }}">PROFILE</a>
                                 </li>
                                 <li class="page-scroll">
-                                    <a href="classes.html">CLASSES</a>
+                                    <a href="{{ route('classlist') }}">CLASSES</a>
                                 </li>
                                 <li class="page-scroll">
-                                    <a href="">GAMES</a>
+                                    <a href="{{ route('gamelist') }}">GAMES</a>
                                 </li>
                                 <li class="page-scroll">
-                                    <a href="contact.html">CONTACT</a>
+                                    <a href="{{ route('contact') }}">CONTACT</a>
                                 </li>
                                   <li class="page-scroll">
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                     document.getElementById('logout-form').submit();" data-toggle="modal" data-target="#myModal">
                                             Logout
                                         </a>
 
@@ -96,7 +98,28 @@
         @yield('content')
     </div>
 
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Logging Out</h4>
+          </div>
+          <div class="modal-body">
+            <p>You have been logged out Sucessfully </p>
+          </div>           
+        </div>
+
+      </div>
+    </div>
+
+
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/freelancer.js') }}"></script>
 </body>
 </html>

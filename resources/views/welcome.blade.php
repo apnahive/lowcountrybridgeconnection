@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Bridge Club</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -224,7 +224,7 @@
                                                 <div class="col-md-6 col-md-offset-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                                                            <input type="checkbox" name="remember" style="margin-left: -20px!important;" {{ old('remember') ? 'checked' : '' }}> Remember Me
                                                         </label>
                                                     </div>
                                                 </div>
