@@ -14,6 +14,13 @@ class GameController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth:manager');
+    }
+
+    
     public function index()
     {
         $games = Game::all();  
@@ -34,7 +41,7 @@ class GameController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -42,10 +49,11 @@ class GameController extends Controller
     {
         //dd(request()->all());
         $this->validate($request, array(
-            'game_name'=> 'required|max:255',            
-            'club_id'=> 'numeric|min:1',
+            'game_name'=> 'required|max:255',
+            'club_name'=> 'required|max:255',
+            
             'game_description'=> 'required|max:255',
-            'game_date'=> 'required|date|after:tomorrow',            
+            'game_date'=> 'required|date|after:tomorrow',
             'team_size'=> 'numeric|min:2|max:200'            
         ));
 
@@ -53,7 +61,8 @@ class GameController extends Controller
         $game = new Game;
 
         $game->game_name = $request->game_name;
-        $game->club_id = $request->club_id;
+        $game->club_name = $request->club_name;
+        
         $game->game_date = $request->game_date;        
         $game->team_size = $request->team_size;        
         $game->game_description = $request->game_description;        
@@ -61,7 +70,7 @@ class GameController extends Controller
         $game->save();
 
         //redirect to other page
-        return redirect()->route('games.show',$game->id);
+        return redirect()->route('games.show', $game->id);
     }
 
     /**
@@ -72,13 +81,13 @@ class GameController extends Controller
      */
     public function show($id)
     {
-        $game1 = Game::find($id);
+        //$game1 = Game::find($id);
 
         //$clubs = DB::select('select * from clubs where id = ', $game1->club_id);
-        $id1 = $game1->club_id;
+        //$id1 = $game1->club_id;
         //$clubs => Club::findOrFail($club->id); 
         //$clubs = DB::table('clubs')->where('id', $game1->club_id)->get();
-       return view('games.show', ['games' => Game::findOrFail($id)], ['clubs' => Club::findOrFail($id1)]);
+       return view('games.show', ['games' => Game::findOrFail($id)]);
         //
     }
 
@@ -90,7 +99,9 @@ class GameController extends Controller
      */
     public function edit($id)
     {
-        //
+         $games = Game::find($id);
+        $clubs = DB::table('clubs')->get();
+        return view('games.edit', ['games' => $games], ['clubs' => $clubs]);
     }
 
     /**
@@ -102,7 +113,28 @@ class GameController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $this->validate($request, array(
+            'game_name'=> 'required|max:255',
+            'club_name'=> 'required|max:255',
+            
+            'game_description'=> 'required|max:255',
+            'game_date'=> 'required|date|after:tomorrow',
+            'team_size'=> 'numeric|min:2|max:200'            
+        ));
+
+        $game = Game::find($id);
+
+        $game->game_name = $request->input('game_name');
+        $game->club_name = $request->input('club_name');
+        
+        $game->game_date = $request->input('game_date');        
+        $game->team_size = $request->input('team_size');        
+        $game->game_description = $request->input('game_description');        
+
+        $game->save();
+
+        //redirect to other page
+        return redirect()->route('games.show',$game->id);
     }
 
     /**

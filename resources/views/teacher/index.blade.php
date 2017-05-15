@@ -23,13 +23,13 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <img src="img/teacher.jpg">
-                    <h5>Mr. Teach Teacherson</h5>
+                    <h5>Mr. {{ $user->name }} </h5>
                         <hr class="star-primary">
                     </div>
                 </div>
              <div class="row text-center">
-        <div class="col-md-4"><a href="/classes/create"> <button type="button" class="btn btn-primary" >Create class </button></a></div>
-        <div class="col-md-4"><a href="/classes/{id}/edit"><button type="button" class="btn btn-primary">Modify an existing Class</button></a></div>
+        <div class="col-md-4"><a href="{{ route('classes.create') }}"> <button type="button" class="btn btn-primary" >Create class </button></a></div>
+        <div class="col-md-4"><a href="{{ route('classes.index') }}"><button type="button" class="btn btn-primary">Modify an existing Class</button></a></div>
         <div class="col-md-4"><a href="#"><button type="button" class="btn btn-primary">Edit profile</button></a></div>
       </div>
         </section>
@@ -55,8 +55,4 @@
                 </div>
             </div>
         </footer>
-
-
-
-
 @endsection

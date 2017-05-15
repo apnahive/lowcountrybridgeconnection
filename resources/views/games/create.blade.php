@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.manage_app')
 
 @section('content')
 
@@ -14,7 +14,7 @@
 <div class="container" style="margin-top: 60px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <a href="/games"><button type="button" class="btn btn-lg btn-info">Back</button></a>            
+            <a href="{{ URL::previous() }}"><button type="button" class="btn btn-lg btn-info">Back</button></a>            
             <div class="panel panel-default" style="margin-top: 30px;">            
                 <div class="panel-heading">Create Game</div>
                 <div class="panel-body">
@@ -53,10 +53,10 @@
 
                             <div class="col-md-6">
                                 <div class="form-group" style="margin: 0;">                                    
-                                    <select class="custom-select form-control" id="club_id" name="club_id">
+                                    <select class="custom-select form-control" id="club_name" name="club_name">
                                       <option selected>Choose...</option>
                                         @foreach ($clubs as $club) 
-                                            <option value="{{$club->id}}">{{$club->club_name}}</h1>
+                                            <option value="{{$club->club_name}}">{{$club->club_name}}</h1>
                                         @endforeach                                      
                                     </select>
                                 </div>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.manage_app')
 
 @section('content')
 <header class="teacher">
@@ -12,13 +12,14 @@
 <div class="container" style="margin-top: 60px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <a href="/classes/"><button type="button" class="btn btn-lg btn-info">Back</button></a>            
+            <a href="{{ URL::previous() }}"><button type="button" class="btn btn-lg btn-info">Back</button></a>            
             <div class="panel panel-default" style="margin-top: 30px;">
                 <div class="panel-heading">Edit Class</div>
                 <div class="panel-body">
                
-                    <form class="form-horizontal" role="form" method="PUT" action="{{ route('classes.update', $classes['id'])}}">
-                        {{ csrf_field() }}
+                    <form class="form-horizontal" role="form" method="POST" action="{!! route('classes.update', $classes['id']) !!}">
+                        <input type="hidden" name="_method" value="PUT">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                         <div class="form-group{{ $errors->has('class_name') ? ' has-error' : '' }}">
                             <label for="class_name" class="col-md-4 control-label">Class Name</label>
@@ -37,7 +38,7 @@
                             <label for="class_description" class="col-md-4 control-label">Class Description</label>
 
                             <div class="col-md-6">
-                                <textarea id="class_description" type="text" class="form-control" name="class_description" value="{{ old('class_description') }}" required autofocus></textarea>
+                                <textarea id="class_description" type="text" class="form-control" name="class_description" rows="5" required autofocus>{!! $classes->class_description !!}</textarea>
 
                                 @if ($errors->has('class_description'))
                                     <span class="help-block">
@@ -52,7 +53,7 @@
                             <div class="col-md-6">
                                 <div class="form-group" style="margin: 0;">                                    
                                     <select class="custom-select form-control" id="club_name" name="club_name">
-                                      <option selected>Choose...</option>
+                                      <option selected>{{$classes->club_name}}</option>
                                         @foreach ($clubs as $club) 
                                             <option value="{{$club->club_name}}">{{$club->club_name}}</h1>
                                         @endforeach                                      
@@ -70,7 +71,7 @@
                             <label for="class_from" class="col-md-4 control-label">From Date</label>
 
                             <div class="col-md-6">
-                                <input id="class_from" type="date" class="form-control" name="class_from" value="{{ $classes['class_form'] }}" required autofocus>
+                                <input id="class_from" type="date" class="form-control" name="class_from" value="{{ $classes['class_from'] }}" required autofocus>
 
                                 @if ($errors->has('class_from'))
                                     <span class="help-block">
@@ -111,7 +112,14 @@
                             <label for="payment_option" class="col-md-4 control-label">Choose Payment Option</label>
 
                             <div class="col-md-6">
-                                <input id="payment_option" type="text" class="form-control" name="payment_option" value="{{ $classes['payment_option'] }}" required autofocus>
+                                
+                                <select class="custom-select form-control" id="payment_option" name="payment_option">
+                                      <option selected>{{ $classes['payment_option'] }}</option>
+                                      <option value="Prepayment required">Prepayment required</option>
+                                      <option value="Bring Cash or Check">Bring Cash or Check</option>
+                                      <option value="Full Series">Full Series</option>
+                                      <option value="Individual">Individual</option>
+                                    </select>
 
                                 @if ($errors->has('payment_option'))
                                     <span class="help-block">

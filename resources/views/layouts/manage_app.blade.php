@@ -62,24 +62,7 @@
                               <li class="hidden">
                                     <a href="#page-top"></a>
                                 </li>
-                                <li class="page-scroll">
-                                    <a href="{{ route('home') }}">Home</a>
-                                </li>
-                                <li class="page-scroll">
-                                    <a href="{{ route('news') }}">LOCATIONS-NEWS-INFORMATION</a>
-                                </li>
-                                <li class="page-scroll">
-                                    <a href="{{ route('profile') }}">PROFILE</a>
-                                </li>
-                                <li class="page-scroll">
-                                    <a href="{{ route('classlist') }}">CLASSES</a>
-                                </li>
-                                <li class="page-scroll">
-                                    <a href="{{ route('gamelist') }}">GAMES</a>
-                                </li>
-                                <li class="page-scroll">
-                                    <a href="{{ route('contact') }}">CONTACT</a>
-                                </li>
+                                
                                   <li class="page-scroll">
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

@@ -1,21 +1,10 @@
-@extends('layouts.manage_app')
+@extends('layouts.app')
 
 @section('content')
-
-<header class="teacher">
-    <div class="container" id="maincontent" tabindex="-1">
-        <div class="row">
-            <div class="col-lg-12">
-            </div>
-        </div>
-    </div>
-</header>
-
-<div class="container" style="margin-top: 60px;">
+<div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <a href="{{ URL::previous() }}"><button type="button" class="btn btn-lg btn-info">Back</button></a>            
-            <div class="panel panel-default" style="margin-top: 30px;">            
+            <div class="panel panel-default">
                 <div class="panel-heading">Create Class</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('classes.store') }}">
@@ -34,32 +23,13 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('class_description') ? ' has-error' : '' }}">
-                            <label for="class_description" class="col-md-4 control-label">Class Description</label>
-
-                            <div class="col-md-6">
-                                <textarea id="class_description" type="text" class="form-control" name="class_description" value="{{ old('class_description') }}" required autofocus></textarea>
-
-                                @if ($errors->has('class_description'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('class_description') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
 
                         <div class="form-group{{ $errors->has('club_name') ? ' has-error' : '' }}">
                             <label for="club_name" class="col-md-4 control-label">Club Name</label>
 
                             <div class="col-md-6">
-                                <div class="form-group" style="margin: 0;">                                    
-                                    <select class="custom-select form-control" id="club_name" name="club_name">
-                                      <option selected>Choose...</option>
-                                        @foreach ($clubs as $club) 
-                                            <option value="{{$club->club_name}}">{{$club->club_name}}</h1>
-                                        @endforeach                                      
-                                    </select>
-                                </div>
+                                <input id="club_name" type="text" class="form-control" name="club_name" value="{{ old('club_name') }}" required autofocus>
+
                                 @if ($errors->has('club_name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('club_name') }}</strong>
@@ -68,29 +38,29 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('class_from') ? ' has-error' : '' }}">
-                            <label for="class_from" class="col-md-4 control-label">From Date</label>
+                        <div class="form-group{{ $errors->has('from_date') ? ' has-error' : '' }}">
+                            <label for="from_date" class="col-md-4 control-label">From Date</label>
 
                             <div class="col-md-6">
-                                <input id="class_from" type="date" class="form-control" name="class_from" value="{{ old('class_from') }}" required autofocus>
+                                <input id="from_date" type="date" class="form-control" name="from_date" value="{{ old('from_date') }}" required autofocus>
 
-                                @if ($errors->has('class_from'))
+                                @if ($errors->has('from_date'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('class_from') }}</strong>
+                                        <strong>{{ $errors->first('from_date') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('class_till') ? ' has-error' : '' }}">
-                            <label for="class_till" class="col-md-4 control-label">Till Date</label>
+                        <div class="form-group{{ $errors->has('till_date') ? ' has-error' : '' }}">
+                            <label for="till_date" class="col-md-4 control-label">Till Date</label>
 
                             <div class="col-md-6">
-                                <input id="class_till" type="date" class="form-control" name="class_till" value="{{ old('class_till') }}" required autofocus>
+                                <input id="till_date" type="date" class="form-control" name="till_date" value="{{ old('till_date') }}" required autofocus>
 
-                                @if ($errors->has('class_till'))
+                                @if ($errors->has('till_date'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('class_till') }}</strong>
+                                        <strong>{{ $errors->first('till_date') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -114,15 +84,7 @@
                             <label for="payment_option" class="col-md-4 control-label">Choose Payment Option</label>
 
                             <div class="col-md-6">
-                                <div class="form-group" style="margin: 0;">                                    
-                                    <select class="custom-select form-control" id="payment_option" name="payment_option">
-                                      <option selected>Choose...</option>
-                                      <option value="Prepayment required">Prepayment required</option>
-                                      <option value="Bring Cash or Check">Bring Cash or Check</option>
-                                      <option value="Full Series">Full Series</option>
-                                      <option value="Individual">Individual</option>
-                                    </select>
-                                 </div>                                  
+                                <input id="payment_option" type="text" class="form-control" name="payment_option" value="{{ old('payment_option') }}" required autofocus>
 
                                 @if ($errors->has('payment_option'))
                                     <span class="help-block">
@@ -136,7 +98,7 @@
                             <label for="class_flyer_address" class="col-md-4 control-label">Flyer URL</label>
 
                             <div class="col-md-6">
-                                <input id="class_flyer_address" type="text" class="form-control" name="class_flyer_address" value="{{ old('class_flyer_address') }}" required autofocus>
+                                <input id="class_flyer_address" type="text" class="form-control" name="class_flyer_address" value="{{ old('payment_option') }}" required autofocus>
 
                                 @if ($errors->has('class_flyer_address'))
                                     <span class="help-block">
@@ -161,16 +123,4 @@
         </div>
     </div>
 </div>
-<!-- Footer -->
-<footer class="text-center">
-    <div class="footer-below">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    Copyright &copy; Bridge Club 2017
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
 @endsection

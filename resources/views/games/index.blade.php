@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.manage_app')
 
 @section('content')
 <header class="teacher">
@@ -12,7 +12,7 @@
 <div class="container" style="margin-top: 60px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <a href=""><button type="button" class="btn btn-lg btn-info">Back</button></a>
+            <a href="{{ URL::previous() }}"><button type="button" class="btn btn-lg btn-info">Back</button></a>
             <a href="/games/create" class="pull-right"><button type="button" class="btn btn-lg btn-info pull-right">Add a new Game</button></a>
             <div class="panel panel-default" style="margin-top: 30px;">
                 <div class="panel-heading">Available Games</div>
@@ -32,8 +32,8 @@
                         <div class="col-md-3">{{ $value->game_name }}</div>
                         <div class="col-md-3">{{ $value->game_date }}</div>
                         <div class="col-md-3" style="text-align: center">
-                            <div class="col-md-6"><a href="/games/edit/{{ $value->id }}"><button type="button" class="btn btn-priamry">Edit</button></a></div> 
-                            <div class="col-md-6"><a href="/games/{{ $value->id }}"><button type="button" class="btn btn-priamry">Veiw</button></a></div>                            
+                            <div class="col-md-6"><a href="{{ route('games.edit', $value->id) }}"><button type="button" class="btn btn-priamry">Edit</button></a></div> 
+                            <div class="col-md-6"><a href="{{ route('games.show', $value->id) }}"><button type="button" class="btn btn-priamry">Veiw</button></a></div>                            
                             
                         </div>
                     </div>                                        

@@ -15,6 +15,12 @@ class ClassroomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth:teacher');
+    }
+    
     public function index()
     {
         //$clubs = DB::table('clubs')->get();
@@ -132,15 +138,15 @@ class ClassroomController extends Controller
         //store in database
         $class = Classroom::find($id);
 
-        $class->class_name = $request->class_name;
-        $class->club_name = $request->club_name;
-        $class->class_from = $request->class_from;
-        $class->class_till = $request->class_till;
-        $class->class_size = $request->class_size;
-        $class->payment_option = $request->payment_option;
-        $class->class_flyer_address = $request->class_flyer_address;
-        $class->class_description = "samar";
-        $class->club_id = "2";
+        $class->class_name = $request->input('class_name');
+        $class->club_name = $request->input('club_name');
+        $class->class_from = $request->input('class_from');
+        $class->class_till = $request->input('class_till');
+        $class->class_size = $request->input('class_size');
+        $class->payment_option = $request->input('payment_option');
+        $class->class_flyer_address = $request->input('class_flyer_address');
+        $class->class_description = $request->input('class_description');
+        
 
         $class->save();
 

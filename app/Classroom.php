@@ -3,13 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Classroom extends Model
+//class Classroom extends Model
+class Classroom extends Authenticatable
 {
    // protected $gurad = 'superadmin';
-	  protected $fillable = [
-	  'class_name', 'club_name', 'class_description', 'class_from', 'class_till', 'class_size', 'payment_option', 'class_flyer_address'
-    ];
+	 protected $guard = 'teacher';
+
+	  protected $fillable = ['class_name'];
 }
-
-

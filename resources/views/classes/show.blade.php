@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.manage_app')
 
 @section('content')
 <header class="teacher">
@@ -12,7 +12,7 @@
 <div class="container" style="margin-top: 60px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-2" style="margin-bottom: 30px;">
-            <a href="/classes/"><button type="button" class="btn btn-lg btn-info">Back</button></a>            
+            <a href="{{ URL::previous() }}"><button type="button" class="btn btn-lg btn-info">Back</button></a>            
             <div class="panel panel-default" style="margin-top: 30px;">
                 <div class="panel-heading">Class Details</div>
                 <div class="panel-body" style="font-size: 19px;">               
@@ -51,7 +51,7 @@
                     
                 </div>                
             </div>
-            <a href="/classes/edit/{{ $classes->id }}"><button type="button" class="btn btn-lg btn-info">Edit</button></a>
+            <a href="{{ route('classes.edit', $classes->id) }}"><button type="button" class="btn btn-lg btn-info">Edit</button></a>
         </div>
     </div>
 </div>

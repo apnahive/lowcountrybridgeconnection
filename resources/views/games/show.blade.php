@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.manage_app')
 
 @section('content')
 <header class="teacher">
@@ -12,7 +12,7 @@
 <div class="container" style="margin-top: 60px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-2" style="margin-bottom: 30px;">
-            <a href="/games/"><button type="button" class="btn btn-lg btn-info">Back</button></a>            
+            <a href="{{ URL::previous() }}"><button type="button" class="btn btn-lg btn-info">Back</button></a>            
             <div class="panel panel-default" style="margin-top: 30px;">
                 <div class="panel-heading">Games Details</div>
                 <div class="panel-body" style="font-size: 19px;">               
@@ -22,7 +22,7 @@
                     </div>
                     <div class="row" style="margin-bottom: 10px;">
                         <div class="col-md-4 showdata">Club Name :</div>
-                        <div class="col-md-6"> {{ $clubs->club_name }} </div>
+                        <div class="col-md-6"> {{ $games->club_name }} </div>
                     </div>
                     <div class="row" style="margin-bottom: 10px;">
                         <div class="col-md-4 showdata">Game Description :</div>
@@ -41,7 +41,7 @@
                     
                 </div>                
             </div>
-            <a href="/games/edit/{{ $games->id }}"><button type="button" class="btn btn-lg btn-info">Edit</button></a>
+            <a href="{{ route('games.edit', $games->id) }}"><button type="button" class="btn btn-lg btn-info">Edit</button></a>
         </div>
     </div>
 </div>
