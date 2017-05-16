@@ -40,26 +40,32 @@ class ManagerController extends Controller
     }
     public function update(Request $request, $id)
     {
-        
-          $this->validate($request, array(
-            'name'=> 'required|max:255', 
-            'password' => 'required|string|min:6',
-            
+         $this->validate($request, array(
+           'name'=> 'required|max:255', 
+           'old_password' => 'required|string|min:6',
+           'new_password' => 'required|string|min:6',
+           'password_confirmation' => 'required|string|same:new_password',
         ));
 
-        //store in database
         $manager = Manager::findOrFail($id);
-        //$teacher1 = validator($teacher);
+        $old_password = $request->old_password;
+        $cpassword = $manager->password;
+        if (Hash::check($old_password, $cpassword)) {
+            //store in database
+            
+            //$teacher1 = validator($teacher);
 
-        $manager->name = $request->input('name');
-        $manager->password = Hash::make($request->password);
-        
-        
+            $manager->name = $request->input('name');
+            $manager->password = Hash::make($request->new_password);
+            
+            
 
-        $manager->save();
+            $manager->save();
+        }    
+        
 
         //redirect to other page
-        return redirect()->route('manager.index',$manager->id); 
+        return redirect()->route('manager.index'); 
     }
     public function store(Request $request)
     {
