@@ -56,7 +56,7 @@
                                     <select class="custom-select form-control" id="club_name" name="club_name">
                                       <option selected>Choose...</option>
                                         @foreach ($clubs as $club) 
-                                            <option value="{{$club->club_name}}">{{$club->club_name}}</h1>
+                                            <h1><option value="{{$club->club_name}}">{{$club->club_name}}</h1>
                                         @endforeach                                      
                                     </select>
                                 </div>

@@ -25,7 +25,7 @@ class ManagerLoginController extends Controller
     		]);
     	//Attept to log the user in
     	if(Auth::guard('manager')->attempt(['email'=> $request->email, 'password' => $request->password], $request->remember)){
-        return redirect()->intended(route('manager'));
+        return redirect()->intended(route('manager.index'));
         }
     	//if successful, then redirect to dashboard
         return redirect()->back()->withInput($request->only('email', 'remember'));

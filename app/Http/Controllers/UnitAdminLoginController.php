@@ -23,7 +23,7 @@ class UnitAdminLoginController extends Controller
     		]);
     	//Attept to log the user in
     	if(Auth::guard('unitadmin')->attempt(['email'=> $request->email, 'password' => $request->password], $request->remember)){
-        return redirect()->intended(route('unitadmin'));
+        return redirect()->intended(route('unitadmin.index'));
         }
     	//if successful, then redirect to dashboard
         return redirect()->back()->withInput($request->only('email', 'remember'));
