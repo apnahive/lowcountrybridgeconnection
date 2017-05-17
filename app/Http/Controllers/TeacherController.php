@@ -40,8 +40,17 @@ class TeacherController extends Controller
     public function update(Request $request, $id)
     {
 
-        $this->validate($request, array(
-           'name'=> 'required|max:255', 
+       if ($request->input('name'))
+        {
+          $this->validate($request, array(
+           'name'=> 'required|max:255',            
+            ));
+          $teacher = Teacher::findOrFail($id);
+          $teacher->name = $request->input('name');
+          $teacher->save();
+        }
+        else {
+         $this->validate($request, array(           
            'old_password' => 'required|string|min:6',
            'new_password' => 'required|string|min:6',
            'password_confirmation' => 'required|string|same:new_password',
@@ -52,17 +61,10 @@ class TeacherController extends Controller
         $cpassword = $teacher->password;
         if (Hash::check($old_password, $cpassword)) {
             //store in database
-            
-            //$teacher1 = validator($teacher);
-
-            $teacher->name = $request->input('name');
             $teacher->password = Hash::make($request->new_password);
-            
-            
-
             $teacher->save();
+          }
         }    
-        
 
         //redirect to other page
         return redirect()->route('teacher.index'); 

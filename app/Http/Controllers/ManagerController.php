@@ -40,8 +40,18 @@ class ManagerController extends Controller
     }
     public function update(Request $request, $id)
     {
-         $this->validate($request, array(
-           'name'=> 'required|max:255', 
+         
+        if ($request->input('name'))
+        {
+          $this->validate($request, array(
+           'name'=> 'required|max:255',            
+            ));
+          $manager = Manager::findOrFail($id);
+          $manager->name = $request->input('name');
+          $manager->save();
+        }
+        else {
+         $this->validate($request, array(           
            'old_password' => 'required|string|min:6',
            'new_password' => 'required|string|min:6',
            'password_confirmation' => 'required|string|same:new_password',
@@ -52,15 +62,9 @@ class ManagerController extends Controller
         $cpassword = $manager->password;
         if (Hash::check($old_password, $cpassword)) {
             //store in database
-            
-            //$teacher1 = validator($teacher);
-
-            $manager->name = $request->input('name');
             $manager->password = Hash::make($request->new_password);
-            
-            
-
             $manager->save();
+          }
         }    
         
 
