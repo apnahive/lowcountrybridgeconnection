@@ -30,39 +30,17 @@
             <div class="mid-section">                
                 <div class="col-md-6">
                 <p style="font-weight: 700;">Hilton Head Island Winter Classes</p>
-                    <div class="row sapce1">
+                @foreach ($classes as $classkey => $value)
+                    <div class="row sapce1">                    
                         <div class="col-md-6">
-                            Competitive Bidding
+                            {{ $value->class_name }}
                         </div>
                         <div class="col-md-6 right1">
-                            <button type="button" class="btn btn-primary sp">Join Now</button>
+                            <a href="{!! route('subscription.update', $value['id']) !!}"><button type="button" class="btn btn-primary sp">Join Now</button></a>
                         </div>
                     </div>
-                    <div class="row sapce1">
-                        <div class="col-md-6">
-                            Slam School
-                        </div>
-                        <div class="col-md-6 right1">
-                            <button type="button" class="btn btn-primary sp">Join Now</button>
-                        </div>
-                    </div>
-                    <div class="row sapce1">
-                        <div class="col-md-6">
-                            Absolute Beginner Bridge
-                        </div>
-                        <div class="col-md-6 right1">
-                            <button type="button" class="btn btn-primary sp">Join Now</button>
-                        </div>
-                    </div>
-                    <div class="row sapce1">
-                        <div class="col-md-6">
-                            Popular Conventions
-                        </div>
-                        <div class="col-md-6 right1">
-                            <button type="button" class="btn btn-primary sp">Join Now</button>
-                        </div>
-                    </div>                    
-                </div>
+                @endforeach 
+                </div>                    
                 <div class="col-md-6">
                     <p style="font-weight: 700;">Hilton Head Island Spring Classes</p>
                     <div class="row sapce1">

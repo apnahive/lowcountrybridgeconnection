@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Mail;
 use App\Mail\NewUserWelcome;
 use Auth;
+use Illuminate\Support\Facades\DB;
+use App\Classroom;
 
 class HomeController extends Controller
 {
@@ -37,7 +39,9 @@ class HomeController extends Controller
 
     public function showClass()
     {
-        return view('classes');
+        $classes = Classroom::all();  
+        return view('classes', compact('classes'));
+        
     }
 
     public function showGame()

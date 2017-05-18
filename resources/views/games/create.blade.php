@@ -1,4 +1,4 @@
-@extends('layouts.manage_app')
+@extends('layouts.manager_app')
 
 @section('content')
 
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('game_description') ? ' has-error' : '' }}">
-                            <label for="game_description" class="col-md-4 control-label">Class Description</label>
+                            <label for="game_description" class="col-md-4 control-label">Game Description</label>
 
                             <div class="col-md-6">
                                 <textarea id="game_description" type="text" class="form-control" name="game_description" value="{{ old('game_description') }}" required autofocus></textarea>
@@ -84,10 +84,17 @@
 
                         
                         <div class="form-group{{ $errors->has('team_size') ? ' has-error' : '' }}">
-                            <label for="class_size" class="col-md-4 control-label">Team Size</label>
+                            <label for="team_size" class="col-md-4 control-label">Team Size</label>
 
                             <div class="col-md-6">
-                                <input id="team_size" type="text" class="form-control" name="team_size" value="{{ old('team_size') }}" required autofocus>
+                                <div class="form-group" style="margin: 0;">                                    
+                                    <select class="custom-select form-control" id="team_size" name="team_size">
+                                      <option disabled="true">Choose...</option>
+                                      <option value="1">Single</option>
+                                      <option value="2">Two-Person</option>
+                                      <option value="4">Four-Person</option>
+                                    </select>
+                                 </div>                                  
 
                                 @if ($errors->has('team_size'))
                                     <span class="help-block">
@@ -96,6 +103,8 @@
                                 @endif
                             </div>
                         </div>
+
+                       
 
                         
 

@@ -1,14 +1,7 @@
-@extends('layouts.manage_app')
+@extends('layouts.manager_app')
 
 @section('content')
-<header class="teacher">
-            <div class="container" id="maincontent" tabindex="-1">
-                <div class="row">
-                    <div class="col-lg-12">
-                    </div>
-                </div>
-            </div>
-        </header>
+
         <!-- Portfolio Grid Section --> 
     <div class="row" style="width: 100%">
                     <div class="col-lg-12 text-center">
@@ -29,7 +22,7 @@
                 </div>
              <div class="row text-center">
         <div class="col-md-4"><a href="/games/create"><button type="button" class="btn btn-primary">Create game </button></a></div>
-        <div class="col-md-4"><button type="button" class="btn btn-primary">Modify an existing game</button></div>
+        <div class="col-md-4"><a href="{{ route('games.index') }}"><button type="button" class="btn btn-primary">Modify an existing game</button></a></div>
          <div class="col-md-4"><a href="{{ route('manager.edit', $user->id) }}"><button type="button" class="btn btn-primary">Edit profile</button></a></div>
       </div>
         </section>

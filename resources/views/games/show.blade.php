@@ -1,4 +1,4 @@
-@extends('layouts.manage_app')
+@extends('layouts.manager_app')
 
 @section('content')
 <header class="teacher">

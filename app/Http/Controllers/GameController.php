@@ -54,7 +54,7 @@ class GameController extends Controller
             
             'game_description'=> 'required|max:255',
             'game_date'=> 'required|date|after:tomorrow',
-            'team_size'=> 'numeric|min:2|max:200'            
+            'team_size'=> 'numeric|min:1|max:200'            
         ));
 
         //store in database
@@ -119,7 +119,7 @@ class GameController extends Controller
             
             'game_description'=> 'required|max:255',
             'game_date'=> 'required|date|after:tomorrow',
-            'team_size'=> 'numeric|min:2|max:200'            
+            'team_size'=> 'numeric|min:1|max:200'            
         ));
 
         $game = Game::find($id);

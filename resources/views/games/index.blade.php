@@ -1,4 +1,4 @@
-@extends('layouts.manage_app')
+@extends('layouts.manager_app')
 
 @section('content')
 <header class="teacher">
@@ -33,7 +33,7 @@
                         <div class="col-md-3">{{ $value->game_date }}</div>
                         <div class="col-md-3" style="text-align: center">
                             <div class="col-md-6"><a href="{{ route('games.edit', $value->id) }}"><button type="button" class="btn btn-priamry">Edit</button></a></div> 
-                            <div class="col-md-6"><a href="{{ route('games.show', $value->id) }}"><button type="button" class="btn btn-priamry">Veiw</button></a></div>                            
+                            <div class="col-md-6"><a href="{{ route('games.show', $value->id) }}"><button type="button" class="btn btn-priamry">View</button></a></div>                            
                             
                         </div>
                     </div>                                        

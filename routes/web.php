@@ -44,9 +44,12 @@ Route::resource('games', 'GameController');
 Route::resource('clubs', 'ClubController');
 Route::resource('workshops', 'WorkshopController');
 Route::resource('teacher', 'TeacherController');
-Route::resource('unitadmin', 'UnitadminController');
+Route::resource('unitadmins', 'UnitadminController');
 Route::resource('manager', 'ManagerController');
+Route::post('unitadmin', 'UnitAdminController@store')->name('unitadmin.store');
+Route::post('unitadminn', 'UnitAdminController@store1')->name('unitadmin.store1');
 
+Route::resource('subscription', 'Class_subscriptionController');
 //Route::get('/classes/edit/{class1}', 'ClassroomController@edit');
 //Route::get('/classes/show/{id}', 'ClassroomController@edit');
 

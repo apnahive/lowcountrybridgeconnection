@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Teacher;
+use App\Manager;
+use Hash;
+
 class UnitadminController extends Controller
 {
     /**
@@ -13,7 +17,7 @@ class UnitadminController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth:unitadmin');
+        $this->middleware('auth:unitadmin');
     }
 
     /**
@@ -46,7 +50,51 @@ class UnitadminController extends Controller
      */
     public function store(Request $request)
     {
-        dd(request()->all());
+        //dd(request()->all());
+        $this->validate($request, array(
+            'name'=> 'required|max:255',
+            'email' => 'required|string|email|max:255|unique:users', 
+            'password' => 'required|string|min:6'
+        ));
+
+        //store in database
+        $teacher = new Teacher;
+        //$request->merge(['password' => Hash::make($request->password)]);
+
+        $teacher->name = $request->name;
+        $teacher->email = $request->email;
+        $teacher->password = Hash::make($request->password);
+
+        $teacher->save();
+
+        //redirect to other page
+        return redirect()->route('unitadmins.index');
+
+    }
+    public function store1(Request $request)
+    {
+        //dd(request()->all());
+        //validate the data
+        $this->validate($request, array(
+            'name'=> 'required|max:255',
+            'email' => 'required|string|email|max:255|unique:users', 
+            'password' => 'required|string|min:6'
+        ));
+
+        //store in database
+        $manager = new Manager;
+        //$request->merge(['password' => Hash::make($request->password)]);
+
+        $manager->name = $request->name;
+        $manager->email = $request->email;
+        $manager->password = Hash::make($request->password);
+
+        $manager->save();
+
+        //redirect to other page
+        return redirect()->route('unitadmins.index');
+
+
     }
 
     /**
