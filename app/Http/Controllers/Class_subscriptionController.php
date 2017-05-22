@@ -67,28 +67,23 @@ class Class_subscriptionController extends Controller
     {
         //if subscription_status is true
         $sub = Class_subscription::find($id);
-        
-        $sub->subscription_status = false;
+        if($sub->subscription_status)
+        {
+            $sub->subscription_status = false;
 
-        $sub->save();
-        
-        //find classroom_id from class_subscriptions table
-        $classroom_id = $sub->classroom_id;
-        //find classroom_id from classroom table
-        $class2 = Classroom::where('classroom_id', $classroom_id)->first();
+            $sub->save();
+            
+            //find classroom_id from class_subscriptions table
+            $classroom_id = $sub->classroom_id;
+            //find classroom_id from classroom table
+            $class2 = Classroom::where('classroom_id', $classroom_id)->first();
 
-        //Update classroom table for seats available and seats booked
-        
-        $class2->seats_booked = $class2->seats_booked-1;
-        $class2->seats_available = $class2->seats_available+1;
-        $class2->save();
-       // $class1 = Classroom::findOrFail($class->id);
-        //$class->seats_booked = $class->seats_booked-1;
-        //$class->seats_available = $class->seats_available+1;
-        //$class->save();
-
-      //  notify()->flash('Deleted','error',['text' => 'Word Deleted Succesfully']);
-       // return view('subscription.show');
+            //Update classroom table for seats available and seats booked
+            
+            $class2->seats_booked = $class2->seats_booked-1;
+            $class2->seats_available = $class2->seats_available+1;
+            $class2->save();
+        }
         $id1 = Auth::id();
         $classes = Classroom::all();
         $class_subscription = Class_subscription::where('user_id', $id1)->get(); 

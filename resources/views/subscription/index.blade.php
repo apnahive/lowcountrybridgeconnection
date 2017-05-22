@@ -4,7 +4,7 @@
 
 <div class="container" style="margin-top: 60px;">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <a href="{{ URL::previous() }}"><button type="button" class="btn btn-lg btn-info">Back</button></a>
             <div class="panel panel-default" style="margin-top: 30px;">
                 <div class="panel-heading">Classes Subscribed</div>
@@ -14,8 +14,8 @@
                         <div class="col-md-3">Class Name</div>
                         <div class="col-md-3">Class Starts From</div>
                         <div class="col-md-3" style="text-align: center;">                             
-                            <div class="col-md-6">View</div> 
-                            <div class="col-md-6">Unsubscribe</div>
+                            <div class="col-md-6">Status</div> 
+                            <div class="col-md-6">Action</div>
                         </div>
                     </div>
                     @foreach ($class_subscription as $classkey => $subscriptions)                    
@@ -29,23 +29,30 @@
                                 @elseif ($subscriptions->classroom_id === $aclass->classroom_id)
                                     <div class="col-md-3">{{ $aclass->class_name }}</div>
                                     <div class="col-md-3">{{ $aclass->class_from }}</div>
-                                     <a href="">
-                                            <button type="button" class="btn btn-priamry">View</button>
-                                        </a>
+                                    <div class="col-md-3" style="text-align: center">
+                                        <div class="col-md-6">
+                                        @if ($subscriptions->subscription_status)
+                                        <p >
+                                            Upcoming
+                                        </p>
+                                        @else
+                                        <p>Cancelled</p>
+                                        @endif
+                                        </div>     
+                                        <div class="col-md-6">                       
+                                        @if ($subscriptions->subscription_status)
                                         <a href="{{ route('subscription.edit', $subscriptions->id) }}">
-                                            <button type="button" class="btn btn-priamry">Unsubscribe</button>
-                                        </a>        
-
+                                            <button type="button" class="btn btn-priamry">Cancel</button>
+                                        </a>
+                                        @else        
+                                        <a href="">
+                                            <!-- <button type="button" class="btn btn-priamry"></button> -->
+                                        </a>
+                                        @endif 
+                                        </div> 
+                                    </div>    
                                 @endif
-                        @endforeach   
-                        
-                       
-                        <div class="col-md-3" style="text-align: center">                            
-                            
-                            
-
-                            
-                        </div>
+                        @endforeach                        
                     </div>                                        
                     @endforeach 
                     

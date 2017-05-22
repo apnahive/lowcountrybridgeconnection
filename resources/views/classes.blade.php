@@ -33,7 +33,6 @@
                 <div class="col-md-6">
                 <p style="font-weight: 700;">{{ $value1->category_name }}</p>
                 @foreach ($classes as $classkey => $value)
-                   
                             @if ($value->category_name === $value1->category_name)
                                 <div class="row sapce1">                    
                                     <div class="col-md-6">
@@ -44,7 +43,6 @@
                                     </div>
                                 </div>
                             @endif
-                   
                 @endforeach 
                 </div>                   
             @endforeach  

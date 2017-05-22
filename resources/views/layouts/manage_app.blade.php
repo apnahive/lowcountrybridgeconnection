@@ -40,8 +40,8 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/teacher') }}">
-                        Bridge Club
+                    <a class="fa fa-home navbar-brand" href="{{ url('/teacher') }}">
+                        
                     </a>
                 </div>
 

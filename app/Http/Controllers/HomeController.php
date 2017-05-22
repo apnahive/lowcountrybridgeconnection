@@ -44,10 +44,10 @@ class HomeController extends Controller
     {
         $cat = Classroom::select('category_name')->distinct()->get();
         $id1 = Auth::id();
-        $class_subscription = Class_subscription::where('user_id','!=',  $id1)->get(); 
-        $classes = Classroom::all();
+        $class_subscription = Class_subscription::select('classroom_id')->where('user_id', $id1)->get(); 
+        $classes = Classroom::whereNotIn('classroom_id', $class_subscription)->get(); 
        // $classes = Classroom::all();
-        return view('classes', compact('classes'), compact('cat'), compact('class_subscription'));
+        return view('classes', compact('classes'), compact('cat'));
         
     }
 
