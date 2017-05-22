@@ -8,6 +8,7 @@ use App\Mail\NewUserWelcome;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use App\Classroom;
+use App\Class_subscription;
 use App\Game;
 use App\Class_category;
 
@@ -41,10 +42,12 @@ class HomeController extends Controller
 
     public function showClass()
     {
+        $cat = Classroom::select('category_name')->distinct()->get();
+        $id1 = Auth::id();
+        $class_subscription = Class_subscription::where('user_id','!=',  $id1)->get(); 
         $classes = Classroom::all();
-        //$cat = Class_category::all();
-        $cat = DB::table('classrooms')->select('category_name')->distinct()->get();
-        return view('classes', compact('classes'), compact('cat'));
+       // $classes = Classroom::all();
+        return view('classes', compact('classes'), compact('cat'), compact('class_subscription'));
         
     }
 

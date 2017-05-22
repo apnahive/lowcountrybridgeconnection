@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Classroom;
+use App\Class_category;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -40,7 +41,7 @@ class ClassroomController extends Controller
     public function create()
     {
          $clubs = DB::table('clubs')->get();
-         $categories = DB::table('class_categories')->get();
+         $categories = Class_category::all();
         return view('classes.create',  ['clubs' => $clubs],  ['categories' => $categories]); 
     }
 
