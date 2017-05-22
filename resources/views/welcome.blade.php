@@ -83,7 +83,7 @@
                         <h1 id="homeHeading">Bridge Connection</h1>
                         <h1 id="homeHeading">beaufort &amp; jasper counties SC</h1>
                         <hr style="width: 10%;">
-                        <p>quality bridge resources in the low country. register today and enjoy useful resources about the latest bridge activities in your area. </p>
+                        <p>Quality bridge resources in the low country. register today and enjoy useful resources about the latest bridge activities in your area. </p>
                     </div>
                 </div>
             </header>
@@ -258,7 +258,7 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        Copyright &copy; Bridge Club 2017
+                                        Copyright © The Low Country Bridge Connection 2017
                                     </div>
                                 </div>
                             </div>

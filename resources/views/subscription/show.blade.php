@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.manage_app')
 
 @section('content')
 <header class="teacher">
@@ -12,9 +12,16 @@
 <div class="container" style="margin-top: 60px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-2" style="margin-bottom: 30px;">
-            <a href="{{ URL::previous() }}"><button type="button" class="btn btn-lg btn-info">Back</button></a>            
+            <a href="{{ URL::previous() }}"><button type="button" class="btn btn-lg btn-info">Back</button></a>  
+
+
             <div class="panel panel-default" style="margin-top: 30px;">
-                <div class="panel-heading">Class Detail</div>
+
+            <form class="form-horizontal" role="form" method="POST" action="{!! route('subscription.update', $classes['id']) !!}">
+                        <input type="hidden" name="_method" value="PUT">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                <div class="panel-heading">Class Details</div>
                 <div class="panel-body" style="font-size: 19px;">               
                     <div class="row" style="margin-bottom: 10px;">
                         <div class="col-md-4 showdata">Class Name :</div>
@@ -48,10 +55,19 @@
                         <div class="col-md-4 showdata">Flyer Web Address :</div>
                         <div class="col-md-6">{{ $classes->class_flyer_address}}</div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary pull-right">
+                                Join Now
+                            </button>
+
+                            
+                        </div>
+                    </div>
                     
                 </div>                
             </div>
-            <a href="{{ route('subscriptions.store') }}"><button type="button" class="btn btn-lg btn-info">Subscribe </button></a>
+            <!-- <a href="{{ route('subscription.update', $classes->id) }}"><button type="button" class="btn btn-lg btn-info">Join Now</button></a> -->
         </div>
     </div>
 </div>
@@ -61,7 +77,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    Copyright &copy; Bridge Club 2017
+                    Copyright © The Low Country Bridge Connection 2017
                 </div>
             </div>
         </div>

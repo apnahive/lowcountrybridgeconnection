@@ -8,6 +8,8 @@ use App\Mail\NewUserWelcome;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use App\Classroom;
+use App\Game;
+use App\Class_category;
 
 class HomeController extends Controller
 {
@@ -39,14 +41,17 @@ class HomeController extends Controller
 
     public function showClass()
     {
-        $classes = Classroom::all();  
-        return view('classes', compact('classes'));
+        $classes = Classroom::all();
+        //$cat = Class_category::all();
+        $cat = DB::table('classrooms')->select('category_name')->distinct()->get();
+        return view('classes', compact('classes'), compact('cat'));
         
     }
 
     public function showGame()
     {
-        return view('games');
+        $games = Game::all();  
+        return view('games', compact('games'));
     }
 
     public function showContact()

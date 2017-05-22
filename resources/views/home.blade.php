@@ -44,7 +44,7 @@
                             <tr>
                                 <td>Fripp island bridge club</td>
                                 <td>
-                                    <button type="button" class="btn btn-info">fripp island bridge club</button>
+                                    <button type="button" class="btn btn-info">Fripp Island Bridge club</button>
                                 </td>
                             </tr>
                             <tr>
@@ -79,30 +79,12 @@
 
 
 
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Member Dashboard</div>
-
-                
-
-                
-                    <p>You are logged in as <strong>Member</strong>!</p>
-                    <a href="{{route('sendEmail')}}" class="btn btn-block btn-primary">Send Email</a>
-
-                
-            </div>
-        </div>
-    </div>
-</div>
 <footer class="text-center">
     <div class="footer-below">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">                    
-                    Copyright © Bridge Club 2017
+                    Copyright © The Low Country Bridge Connection 2017
                 </div>
             </div>
         </div>

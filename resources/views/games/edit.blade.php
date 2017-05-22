@@ -1,14 +1,7 @@
 @extends('layouts.manager_app')
 
 @section('content')
-<header class="teacher">
-    <div class="container" id="maincontent" tabindex="-1">
-        <div class="row">
-            <div class="col-lg-12">
-            </div>
-        </div>
-    </div>
-</header>
+
 <div class="container" style="margin-top: 60px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -86,7 +79,14 @@
                             <label for="class_size" class="col-md-4 control-label">Team Size</label>
 
                             <div class="col-md-6">
-                                <input id="team_size" type="text" class="form-control" name="team_size" value="{{ $games['team_size'] }}" required autofocus>
+                                <div class="form-group" style="margin: 0;">                                    
+                                    <select class="custom-select form-control" id="team_size" name="team_size">
+                                      <option disabled="true">Choose...</option>
+                                      <option value="1">Single</option>
+                                      <option value="2">Two-Person</option>
+                                      <option value="4">Four-Person</option>
+                                    </select>
+                                 </div>                                  
 
                                 @if ($errors->has('team_size'))
                                     <span class="help-block">
@@ -119,7 +119,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    Copyright &copy; Bridge Club 2017
+                    Copyright © The Low Country Bridge Connection 2017
                 </div>
             </div>
         </div>

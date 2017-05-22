@@ -5,9 +5,9 @@
 <div class="container" style="margin-top: 60px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-2" style="margin-bottom: 30px;">
-            <a href="{{ route('classes.index') }}"><button type="button" class="btn btn-lg btn-info">Back</button></a>            
+            <a href="{{ URL::previous() }}"><button type="button" class="btn btn-lg btn-info">Back</button></a>            
             <div class="panel panel-default" style="margin-top: 30px;">
-                <div class="panel-heading">Class Details</div>
+                <div class="panel-heading">Category Details</div>
                 <div class="panel-body" style="font-size: 19px;">               
                     <div class="row" style="margin-bottom: 10px;">
                         <div class="col-md-4 showdata">Class Name :</div>

@@ -166,7 +166,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    Copyright &copy; Bridge Club 2017
+                    Copyright © The Low Country Bridge Connection 2017
                 </div>
             </div>
         </div>

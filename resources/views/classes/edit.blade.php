@@ -1,14 +1,7 @@
 @extends('layouts.manage_app')
 
 @section('content')
-<header class="teacher">
-    <div class="container" id="maincontent" tabindex="-1">
-        <div class="row">
-            <div class="col-lg-12">
-            </div>
-        </div>
-    </div>
-</header>
+
 <div class="container" style="margin-top: 60px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -43,6 +36,26 @@
                                 @if ($errors->has('class_description'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('class_description') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('category_name') ? ' has-error' : '' }}">
+                            <label for="club_name" class="col-md-4 control-label">Category Name</label>
+
+                            <div class="col-md-6">
+                                <div class="form-group" style="margin: 0;">                                    
+                                    <select class="custom-select form-control" id="category_name" name="category_name">
+                                      <option selected>{{$classes->category_name}}</option>
+                                        @foreach ($categories as $category) 
+                                            <h1><option value="{{$category->category_name}}">{{$category->category_name}}</h1>
+                                        @endforeach                                      
+                                    </select>
+                                </div>
+                                @if ($errors->has('category_name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('category_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -164,7 +177,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    Copyright &copy; Bridge Club 2017
+                    Copyright © The Low Country Bridge Connection 2017
                 </div>
             </div>
         </div>

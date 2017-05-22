@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Classroom;
-
+use Illuminate\Support\Facades\Auth;
 
 
 class ClassroomController extends Controller
@@ -40,7 +40,8 @@ class ClassroomController extends Controller
     public function create()
     {
          $clubs = DB::table('clubs')->get();
-        return view('classes.create',  ['clubs' => $clubs]); 
+         $categories = DB::table('class_categories')->get();
+        return view('classes.create',  ['clubs' => $clubs],  ['categories' => $categories]); 
     }
 
     /**
@@ -56,12 +57,13 @@ class ClassroomController extends Controller
         $this->validate($request, array(
             'class_name'=> 'required|max:255',            
             'club_name'=> 'required|max:255',
-            'class_description'=> 'required|max:255',
+            'class_description'=> 'required|max:1024',
             'class_from'=> 'required|date|before_or_equal:class_till',
             'class_till'=> 'required|date|after_or_equal:class_from',
             'class_size'=> 'numeric|min:2|max:200',
             'payment_option'=> 'required|max:255',
-            'class_flyer_address'=> 'required|max:255'
+            'class_flyer_address'=> 'required|max:255',
+            'category_name' => 'required|max:255'
         ));
 
         //store in database
@@ -69,6 +71,7 @@ class ClassroomController extends Controller
 
         $class->class_name = $request->class_name;
         $class->club_name = $request->club_name;
+        $class->category_name = $request->category_name;
         $class->class_from = $request->class_from;
         $class->class_till = $request->class_till;
         $class->class_size = $request->class_size;
@@ -76,7 +79,13 @@ class ClassroomController extends Controller
         $class->class_flyer_address = $request->class_flyer_address;
         $class->class_description = $request->class_description;
         $class->club_id = "2";
-
+        $class->classroom_id = uniqid('cr',true);
+        $id1 = Auth::id();
+        $class->teacher_id = $id1;
+        $class->class_status = true;
+        
+        $class->seats_available = $request->class_size;
+        $class->seats_booked = 0;
         $class->save();
 
         //redirect to other page
@@ -109,7 +118,8 @@ class ClassroomController extends Controller
         //$clubs = Club::all(); 
         $classes = Classroom::find($id);
         $clubs = DB::table('clubs')->get();
-        return view('classes.edit', ['classes' => $classes], ['clubs' => $clubs]);
+        $categories = DB::table('class_categories')->get();
+        return view('classes.edit', ['classes' => $classes], ['categories' => $categories, 'clubs' => $clubs]);
         //
     }
 
@@ -132,7 +142,8 @@ class ClassroomController extends Controller
             'class_till'=> 'required|date|after_or_equal:class_from',
             'class_size'=> 'numeric|min:2|max:200',
             'payment_option'=> 'required|max:255',
-            'class_flyer_address'=> 'required|max:255'
+            'class_flyer_address'=> 'required|max:255',
+            'category_name' => 'required|max:255'
         ));
 
         //store in database
@@ -146,6 +157,7 @@ class ClassroomController extends Controller
         $class->payment_option = $request->input('payment_option');
         $class->class_flyer_address = $request->input('class_flyer_address');
         $class->class_description = $request->input('class_description');
+        $class->category_name = $request->category_name;
         
 
         $class->save();

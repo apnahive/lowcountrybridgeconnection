@@ -1,18 +1,12 @@
 @extends('layouts.manager_app')
 
 @section('content')
-<header class="teacher">
-    <div class="container" id="maincontent" tabindex="-1">
-        <div class="row">
-            <div class="col-lg-12">
-            </div>
-        </div>
-    </div>
-</header>
+
+
 <div class="container" style="margin-top: 60px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <a href="{{ URL::previous() }}"><button type="button" class="btn btn-lg btn-info">Back</button></a>
+            <a href="{{ route('manager.index') }}"><button type="button" class="btn btn-lg btn-info">Back</button></a>
             <a href="/games/create" class="pull-right"><button type="button" class="btn btn-lg btn-info pull-right">Add a new Game</button></a>
             <div class="panel panel-default" style="margin-top: 30px;">
                 <div class="panel-heading">Available Games</div>
@@ -43,6 +37,7 @@
             </div>
         </div>
     </div>
+    <div class="row" style="height: 50px;"></div>
 </div>
 <!-- Footer -->
 <footer class="text-center">
@@ -50,7 +45,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    Copyright &copy; Bridge Club 2017
+                    Copyright © The Low Country Bridge Connection 2017
                 </div>
             </div>
         </div>

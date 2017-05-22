@@ -49,7 +49,11 @@ Route::resource('manager', 'ManagerController');
 Route::post('unitadmin', 'UnitAdminController@store')->name('unitadmin.store');
 Route::post('unitadminn', 'UnitAdminController@store1')->name('unitadmin.store1');
 
+Route::resource('categories', 'Class_categoryController');
 Route::resource('subscription', 'Class_subscriptionController');
+Route::post('subscription', 'Class_subscriptionController@cancelsubscription')->name('subscription.cancelsubscription');
+Route::resource('enroll', 'Game_subscriptionController');
+
 //Route::get('/classes/edit/{class1}', 'ClassroomController@edit');
 //Route::get('/classes/show/{id}', 'ClassroomController@edit');
 

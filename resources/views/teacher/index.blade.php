@@ -1,8 +1,7 @@
 @extends('layouts.manage_app')
 
 @section('content')
-        </header>
-        <!-- Portfolio Grid Section --> 
+                <!-- Portfolio Grid Section --> 
     <div class="row" style="width: 100%">
                     <div class="col-lg-12 text-center">
                         
@@ -42,7 +41,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            Copyright &copy; Bridge Club 2017
+                            Copyright © The Low Country Bridge Connection 2017
                         </div>
                     </div>
                 </div>

@@ -30,6 +30,15 @@
 </div>
 <div class="row full1">
     <div class="mid-section1">
+        @foreach ($games as $gamekey => $value)
+        <div class="row" style="margin-top: 50px;">
+            <div class="col-md-3">
+                <h5 class="text-uppercase sport1">{{ $value->game_name }}</h5>
+            </div>
+            <div class="col-md-6"><p class="text-uppercase">{{ $value->game_description }}</p></div>
+            <div class="col-md-3"><a href="{!! route('enroll.show', $value['id']) !!}"><button type="button" class="btn btn-primary">Enroll</button></a></div>
+        </div>
+        @endforeach 
         <div class="row">
             <div class="col-md-3">
                 <h5 class="text-uppercase sport1">Beaufort & Jasper Counties Bridge Clubs</h5>
@@ -37,6 +46,7 @@
             <div class="col-md-6"><p class="text-uppercase">The week of 3/13 has Unit Championship Games at various clubs throughout the week. Check your club's schedule for these games that reward masterpoints at 63.6% of a sectional.</p></div>
             <div class="col-md-3"></div>
         </div>
+
         <div class="row" style="margin-top: 50px;">
             <div class="col-md-3">
                 <h5 class="text-uppercase sport1">hilton head bridge club</h5>
@@ -77,7 +87,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    Copyright &copy; Bridge Club 2017
+                    Copyright © The Low Country Bridge Connection 2017
                 </div>
             </div>
         </div>

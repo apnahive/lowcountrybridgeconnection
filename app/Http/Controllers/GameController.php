@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Game;
 use App\Club;
+use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
 {
@@ -65,7 +66,13 @@ class GameController extends Controller
         
         $game->game_date = $request->game_date;        
         $game->team_size = $request->team_size;        
-        $game->game_description = $request->game_description;        
+        $game->game_description = $request->game_description; 
+        $game->game_id = uniqid('game',true);
+        $id1 = Auth::id();
+        $game->manager_id = $id1;
+        $game->game_status = true;
+        $game->seats_available = '2';
+        $game->seats_booked = '0';
 
         $game->save();
 
