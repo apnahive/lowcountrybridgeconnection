@@ -19,6 +19,10 @@ class Game_subscriptionController extends Controller
     public function index()
     {
         //
+         $id1 = Auth::id();
+        $games = Game::all();
+        $game_subscription = Game_subscription::where('user_id', $id1)->get(); 
+        return view('enroll.index', compact('games'), compact('game_subscription'));
     }
 
     /**
@@ -50,7 +54,7 @@ class Game_subscriptionController extends Controller
      */
     public function show($id)
     {
-         return view('enroll.show', ['games' => Game::findOrFail($id)]);
+        return view('enroll.show', ['games' => Game::findOrFail($id)]);
         //
     }
 
@@ -63,6 +67,28 @@ class Game_subscriptionController extends Controller
     public function edit($id)
     {
         //
+         $sub = Game_subscription::find($id);
+        if($sub->subscription_status)
+        {
+            $sub->subscription_status = false;
+
+            $sub->save();
+            
+            //find classroom_id from class_subscriptions table
+            $game_id = $sub->game_id;
+            //find classroom_id from classroom table
+            $game2 = Game::where('game_id', $game_id)->first();
+
+            //Update classroom table for seats available and seats booked
+            
+            $game2->seats_booked = $game2->seats_booked-1;
+            $game2->seats_available = $game2->seats_available+1;
+            $game2->save();
+        }
+        $id1 = Auth::id();
+        $games = Game::all();
+        $game_subscription = Game_subscription::where('user_id', $id1)->get(); 
+        return view('enroll.index', compact('games'), compact('game_subscription')); 
     }
 
     /**
@@ -86,7 +112,7 @@ class Game_subscriptionController extends Controller
         $game_enroll->game_id = $games->game_id;
         $game_enroll->user_id = $id1;
         $game_enroll->subscription_id = uniqid('gs',true);
-
+        $game_enroll->subscription_status = true;
         $game_enroll->save();
 
         //

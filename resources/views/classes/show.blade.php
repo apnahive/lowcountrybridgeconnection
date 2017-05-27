@@ -32,19 +32,33 @@
                     <div class="row" style="margin-bottom: 10px;">
                         <div class="col-md-4 showdata">Class Size :</div>
                         <div class="col-md-6">{{ $classes->class_size}}</div>
-                    </div>                    
+                    </div> 
+
+                    <div class="row" style="margin-bottom: 10px;">
+                        <div class="col-md-4 showdata">Seats Available :</div>
+                        <div class="col-md-6">{{ $classes->seats_available}}</div>
+                    </div> 
+                    <div class="row" style="margin-bottom: 10px;">
+                        <div class="col-md-4 showdata">Seats Booked :</div>
+                        <div class="col-md-6">{{ $classes->seats_booked}}</div>
+                    </div> 
+
                     <div class="row" style="margin-bottom: 10px;">
                         <div class="col-md-4 showdata">Payment Option :</div>
                         <div class="col-md-6">{{ $classes->payment_option}}</div>
                     </div>
                     <div class="row" style="margin-bottom: 10px;">
                         <div class="col-md-4 showdata">Flyer Web Address :</div>
-                        <div class="col-md-6">{{ $classes->class_flyer_address}}</div>
+                        <div class="col-md-6"> <a href="{{ $classes->class_flyer_address}}" target="_blank">Click Here</a></div>
                     </div>
                     
                 </div>                
             </div>
             <a href="{{ route('classes.edit', $classes->id) }}"><button type="button" class="btn btn-lg btn-info">Edit</button></a>
+            <div class="pull-right">
+                <a href=""><button type="button" class="btn btn-lg btn-info">Add Student</button></a>
+                <a href=""><button type="button" class="btn btn-lg btn-info">Manage Subscription</button></a>                
+            </div>
         </div>
     </div>
 </div>

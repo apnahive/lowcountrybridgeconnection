@@ -9,7 +9,10 @@ use Auth;
 use Illuminate\Support\Facades\DB;
 use App\Classroom;
 use App\Class_subscription;
+use App\Waitlist_subscription;
+use App\Game_subscription;
 use App\Game;
+use App\User;
 use App\Class_category;
 
 class HomeController extends Controller
@@ -45,7 +48,8 @@ class HomeController extends Controller
         $cat = Classroom::select('category_name')->distinct()->get();
         $id1 = Auth::id();
         $class_subscription = Class_subscription::select('classroom_id')->where('user_id', $id1)->get(); 
-        $classes = Classroom::whereNotIn('classroom_id', $class_subscription)->get(); 
+        $waitlist_subscription = Waitlist_subscription::select('classroom_id')->where('user_id', $id1)->get(); 
+        $classes = Classroom::whereNotIn('classroom_id', $class_subscription)->whereNotIn('classroom_id', $waitlist_subscription)->get(); 
        // $classes = Classroom::all();
         return view('classes', compact('classes'), compact('cat'));
         
@@ -53,8 +57,11 @@ class HomeController extends Controller
 
     public function showGame()
     {
-        $games = Game::all();  
-        return view('games', compact('games'));
+        $id1 = Auth::id();
+        $game_subscription = Game_subscription::select('game_id')->where('user_id', $id1)->get(); 
+        $games = Game::whereNotIn('game_id', $game_subscription)->get(); 
+       // $classes = Classroom::all();
+        return view('games', compact('games'));        
     }
 
     public function showContact()
@@ -64,7 +71,9 @@ class HomeController extends Controller
 
     public function showProfile()
     {
-        return view('profile');
+        $id1 = Auth::id();        
+        $profile = User::find($id1);
+        return view('profile', ['profile' => $profile]);
     }
 
     public function showNews()

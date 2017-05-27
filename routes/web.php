@@ -53,6 +53,9 @@ Route::resource('categories', 'Class_categoryController');
 Route::resource('subscription', 'Class_subscriptionController');
 Route::post('subscription', 'Class_subscriptionController@cancelsubscription')->name('subscription.cancelsubscription');
 Route::resource('enroll', 'Game_subscriptionController');
+Route::post('superadmin', 'SuperadminController@store')->name('superadmin.store');
+
+//Route::put('profile/{id}', 'ProfileController@update1')->name('profiles.update1');
 
 //Route::get('/classes/edit/{class1}', 'ClassroomController@edit');
 //Route::get('/classes/show/{id}', 'ClassroomController@edit');

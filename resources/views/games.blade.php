@@ -39,40 +39,6 @@
             <div class="col-md-3"><a href="{!! route('enroll.show', $value['id']) !!}"><button type="button" class="btn btn-primary">Enroll</button></a></div>
         </div>
         @endforeach 
-        <div class="row">
-            <div class="col-md-3">
-                <h5 class="text-uppercase sport1">Beaufort & Jasper Counties Bridge Clubs</h5>
-            </div>
-            <div class="col-md-6"><p class="text-uppercase">The week of 3/13 has Unit Championship Games at various clubs throughout the week. Check your club's schedule for these games that reward masterpoints at 63.6% of a sectional.</p></div>
-            <div class="col-md-3"></div>
-        </div>
-
-        <div class="row" style="margin-top: 50px;">
-            <div class="col-md-3">
-                <h5 class="text-uppercase sport1">hilton head bridge club</h5>
-            </div>
-            <div class="col-md-6">
-                <p class="text-uppercase">a Unit Charity Game is scheduled on Monday March 6th at 1:00pm. This game rewards masterpoints at nearly 82% of a sectional tournament. </p>
-
-                <p class="text-uppercase">An Acbl-wide senior pairs game is scheduled for Monday, March 27th at 1:00pm. This game is for folks born prior to 1/1/1959 and offers 72% of sectional masterpoints. Winners are recognized in the ACBL website and in the Bridge Bulletin. Nationally prepared hand records and analyses will be provided.</p>
-
-                <p class="text-uppercase">Hilton Head will conduct an ACBL-wide Charity Game on Thursday morning April 27th to players with less than 600 masterpoints. The recognition and analysis provided are similar to the Senior Pairs game. The reward is nearly 82% of a sectional. </p>
-            </div>
-            <div class="col-md-3" style="text-align: center;"><button type="submit" class="btn btn-primary">Enroll</button></div>
-        </div>
-        <div class="row" style="margin-top: 50px;">
-            <div class="col-md-3">
-                <h5 class="text-uppercase sport1">okatie (sun city) bridge club</h5>
-            </div>
-            <div class="col-md-6">
-                <p class="text-uppercase">a Unit Charity Game is scheduled on Monday March 6th at 1:00pm. This game rewards masterpoints at nearly 82% of a sectional tournament. </p>
-
-                <p class="text-uppercase">An Acbl-wide senior pairs game is scheduled for Monday, March 27th at 1:00pm. This game is for folks born prior to 1/1/1959 and offers 72% of sectional masterpoints. Winners are recognized in the ACBL website and in the Bridge Bulletin. Nationally prepared hand records and analyses will be provided.</p>
-            </div>
-            <div class="col-md-3" style="text-align: center;"><button type="submit" class="btn btn-primary">Enroll</button></div>
-        </div>
-
-
     </div>
 </div>    
 

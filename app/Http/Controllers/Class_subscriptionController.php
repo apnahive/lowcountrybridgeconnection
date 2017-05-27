@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Classroom;
 use App\Class_subscription;
+use App\Waitlist_subscription;
 use Illuminate\Support\Facades\Auth;
 
 class Class_subscriptionController extends Controller
@@ -102,19 +103,39 @@ class Class_subscriptionController extends Controller
         //dd(request()->all());
         $classes = Classroom::findOrFail($id);
         //$a = $classes->seats_booked;
-        $classes->seats_booked = $classes->seats_booked+1;
-        $classes->seats_available = $classes->seats_available-1;
-        $classes->save();
+        if($classes->seats_available)
+        {
+            $classes->seats_booked = $classes->seats_booked+1;
+            $classes->seats_available = $classes->seats_available-1;
+            $classes->save();
 
-        $class_sub = new Class_subscription;
-        $id1 = Auth::id();
+            $class_sub = new Class_subscription;
+            $id1 = Auth::id();
 
-        $class_sub->classroom_id = $classes->classroom_id;
-        $class_sub->user_id = $id1;
-        $class_sub->subscription_id = uniqid('sb',true);
-        $class_sub->subscription_status = true;
+            $class_sub->classroom_id = $classes->classroom_id;
+            $class_sub->user_id = $id1;
+            $class_sub->subscription_id = uniqid('sb',true);
+            $class_sub->subscription_status = true;
 
-        $class_sub->save();
+            $class_sub->save();
+        }
+        else
+        {
+            /*$classes->seats_booked = $classes->seats_booked+1;
+            $classes->seats_available = $classes->seats_available-1;
+            $classes->save();*/
+
+            $wait = new Waitlist_subscription;
+            $id1 = Auth::id();
+
+            $wait->classroom_id = $classes->classroom_id;
+            $wait->user_id = $id1;
+            $wait->waitlist_id = uniqid('Wl',true);
+            //$wait->subscription_status = true;
+
+            $wait->save();
+
+        }
 
         //
         return redirect()->route('classlist'); 

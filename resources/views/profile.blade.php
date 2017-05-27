@@ -62,35 +62,42 @@
                 <div class="bhoechie-tab-content active">
           <div class="row">
     <div class="col-md-8 col-md-offset-1">
-      <form method="POST" action="/profiles"class="form-horizontal" role="form" >
-        {{ csrf_field() }}
+      <form class="form-horizontal" role="form" method="POST" action="{!! route('profiles.update', $profile['id']) !!}">
+            <input type="hidden" name="_method" value="PUT">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
         <fieldset>
 
           <!-- Form Name -->
           <legend>Personal Profile</legend>
 
           <!-- Text input-->
-
+          
           <div class="form-group" >
-            <label class="col-sm-2 control-label" for="textinput">Email</label>
+            <label class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
-              <label class="col-sm-2 control-label" for="textinput">john.cena@example.com</label>
+              <label class="col-sm-2 control-label">{{ $profile->email }}</label>
             </div>
           </div>
 
 
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="firstname">First Name</label>
+          <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+            <label class="col-sm-2 control-label" for="name">First Name</label>
             <div class="col-sm-10">
-              <input type="text" placeholder="John " class="form-control" id="firstname" name="firstname">
+              <input type="text" class="form-control" id="name" name="name" value="{{ old( 'name', $profile['name']) }}">
             </div>
+             @if ($errors->has('name'))
+                  <span class="help-block">
+                      <strong>{{ $errors->first('name') }}</strong>
+                  </span>
+              @endif
           </div>
 
           <!-- Text input-->
           <div class="form-group">
             <label class="col-sm-2 control-label" for="lastname">Last Name</label>
             <div class="col-sm-10">
-              <input type="text" placeholder="Cena" class="form-control" id="lastname" name="lastname">
+              <input type="text" class="form-control" id="lastname" name="lastname" value="{{ old( 'lastname', $profile['lastname']) }}">
             </div>
           </div>
 
@@ -98,7 +105,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="city">City</label>
             <div class="col-sm-10">
-              <input type="text" placeholder="City" class="form-control" id="city" name="city">
+              <input type="text" placeholder="City" class="form-control" id="city" name="city" value="{{ old( 'city', $profile['city']) }}">
             </div>
           </div>
 
@@ -106,12 +113,12 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="state">State</label>
             <div class="col-sm-4">
-              <input type="text" placeholder="State" class="form-control" id="state" name="state">
+              <input type="text" placeholder="State" class="form-control" id="state" name="state" value="{{ old( 'state', $profile['state']) }}">
             </div>
 
             <label class="col-sm-2 control-label" for="zipcode">Zipcode</label>
             <div class="col-sm-4">
-              <input type="text" placeholder="110001" class="form-control" id="zipcode" name="zipcode">
+              <input type="text" placeholder="110001" class="form-control" id="zipcode" name="zipcode" value="{{ old( 'zipcode', $profile['zipcode']) }}">
             </div>
           </div>
 
@@ -126,8 +133,8 @@
               <button type="submit" class="btn btn-primary">Save</button>
               </div>
             </div>
-          </div>
-
+          </div> 
+          
           
 
         </fieldset>
@@ -141,38 +148,60 @@
                 <div class="bhoechie-tab-content">
           <div class="row">
     <div class="col-md-8 col-md-offset-1">
-      <form class="form-horizontal" role="form">
-        <fieldset>
+      <form class="form-horizontal" role="form" method="POST" action="{!! route('profiles.update', $profile['id']) !!}">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-          <!-- Form Name -->
-          <legend>Update Profile Password</legend>
-          
-          <div class="form-group">
-            <label class="col-sm-4 control-label" for="textinput">Current Password</label>
-            <div class="col-sm-8">
-              <input type="text" placeholder="Password" class="form-control">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-4 control-label" for="textinput">New Password</label>
-            <div class="col-sm-8">
-              <input type="text" placeholder="Password" class="form-control">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-4 control-label" for="textinput">Confirm Password</label>
-            <div class="col-sm-8">
-              <input type="text" placeholder="Password" class="form-control">
-            </div>
-          </div> 
-          <div class="form-group pull-right pull-right1">
-            <div class="col-sm-4">              
-            </div>  
-            <button type="submit" class="btn btn-primary">Update</button>          
-          </div>
+        
+        <div class="form-group{{ $errors->has('old_password') ? ' has-error' : '' }}">
+            <label for="password" class="col-md-4 control-label">Enter Old Password</label>
 
-        </fieldset>
-      </form>
+            <div class="col-md-8">
+                <input id="old_password" type="password" class="form-control" name="old_password" value="" required autofocus>
+
+                @if ($errors->has('old_password'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('old_password') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+        <div class="form-group{{ $errors->has('new_password') ? ' has-error' : '' }}">
+            <label for="new_password" class="col-md-4 control-label">New Password</label>
+
+            <div class="col-md-8">
+                <input id="new_password" type="password" class="form-control" name="new_password" value="" required autofocus>
+
+                @if ($errors->has('new_password'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('new_password') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+            <label for="password_confirmation" class="col-md-4 control-label">Confirm Password</label>
+
+            <div class="col-md-8">
+                <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" value="" required autofocus>
+
+                @if ($errors->has('password_confirmation'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('password_confirmation') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-8 col-md-offset-4">
+                <button type="submit" class="btn btn-primary">
+                    Update
+                </button>
+
+                
+            </div>
+        </div>
+    </form>  
     </div><!-- /.col-lg-12 -->
 </div><!-- /.row -->
                    
@@ -180,7 +209,9 @@
                 <!-- Newsletter section -->
                 <div class="bhoechie-tab-content">
       <div class="container">
-       <form role="form">
+       <form class="form-horizontal" role="form" method="POST" action="{!! route('profiles.update', $profile['id']) !!}">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="row">
             <div class="col-md-8">
                 <fieldset>
@@ -191,31 +222,31 @@
                         Select Which Low Country Bridge Connection Emails You Wish To Receive.
                     </p>
                     <div class="checkbox">
-                        <input id="checkbox1" type="checkbox" name="checkbox1">
+                        <input id="checkbox1" type="radio" name="mailing_options" value="A">
                         <label for="checkbox1">
                             Send All
                         </label>
                     </div>
                     <div class="checkbox checkbox-primary">
-                        <input id="checkbox2" type="checkbox">
+                        <input id="checkbox2" type="radio" name="mailing_options" value="C">
                         <label for="checkbox2">
                             Classes & Seminars
                         </label>
                     </div>
                     <div class="checkbox checkbox-success">
-                        <input id="checkbox3" type="checkbox">
+                        <input id="checkbox3" type="radio" name="mailing_options" value="G">
                         <label for="checkbox3">
                             Special Games
                         </label>
                     </div>
                     <div class="checkbox checkbox-info">
-                        <input id="checkbox4" type="checkbox">
+                        <input id="checkbox4" type="radio" name="mailing_options" value="T">
                         <label for="checkbox4">
                             Tournaments
                         </label>
                     </div>
                     <div class="checkbox checkbox-warning">
-                        <input id="checkbox5" type="checkbox">
+                        <input id="checkbox5" type="radio" name="mailing_options" value="N">
                         <label for="checkbox5">
                             None
                         </label>
@@ -241,7 +272,9 @@
        
                 
       <div class="container">
-       <form role="form">
+       <form class="form-horizontal" role="form" method="POST" action="{!! route('profiles.update', $profile['id']) !!}">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="row">
             <div class="col-md-8">
                 <fieldset>
@@ -252,39 +285,31 @@
                         Which Category of Bridge Classes Have You Attended?
                     </p>
                     <div class="checkbox">
-                        <input id="checkbox11" type="checkbox">
+                        <input id="checkbox11" type="radio" name="class_level" value="B">
                         <label for="checkbox11">
                             Beginner
                         </label>
                     </div>
                     <div class="checkbox checkbox-primary">
-                        <input id="checkbox12" type="checkbox">
+                        <input id="checkbox12" type="radio" name="class_level" value="I">
                         <label for="checkbox12">
                             Beginner Intermediate
                         </label>
                     </div>
                     <div class="checkbox checkbox-success">
-                        <input id="checkbox13" type="checkbox">
+                        <input id="checkbox13" type="radio" name="class_level" value="O">
                         <label for="checkbox13">
                              Both
                         </label>
                     </div>
                     <div class="checkbox checkbox-info">
-                        <input id="checkbox14" type="checkbox">
+                        <input id="checkbox14" type="radio" name="class_level" value="N">
                         <label for="checkbox14">
                             Neither
                         </label>
                     </div>
-                    
                 </fieldset>
-            </div>
-           
-        </div>
-    </form>
-     <form role="form">
-        <div class="row">
-            <div class="col-md-8">
-                <fieldset>
+                <!-- <fieldset>
                     
                     <p>
                         Check The Bridge Workshops You Would Be Interested In Attending. (Check All That Apply)
@@ -411,14 +436,7 @@
                     </div> 
 
                     
-                </fieldset>
-            </div>
-           
-        </div>
-    </form>
-  <form role="form">
-        <div class="row">
-            <div class="col-md-8">
+                </fieldset> -->
                 <fieldset>
                     
                     <p>
@@ -427,7 +445,8 @@
                       <div class="col-md-8 padleft">
                         
                    <div class="checkbox checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbox81" value="option1">
+                        <input type="hidden" name="new_partner_interested" value="false">
+                        <input type="checkbox" id="inlineCheckbox81" name="new_partner_interested" value="true">
                         <label for="inlineCheckbox81"> Yes, I Am Interested In Meeting New Bridge Partners </label>
                     </div>                    
                 </fieldset>
@@ -441,10 +460,11 @@
                       </div>
                     </div>
                 </fieldset>
+
             </div>
            
         </div>
-    </form>
+    </form>    
 </div>
                 
                 </div>
@@ -452,7 +472,9 @@
                 <div class="bhoechie-tab-content">
        
       <div class="container padleft">
-       <form role="form">
+       <form class="form-horizontal" role="form" method="POST" action="{!! route('profiles.update', $profile['id']) !!}">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="row">
             <div class="col-md-8">
                 <fieldset>
@@ -463,40 +485,33 @@
                         How Many Times Per Month Do You Play Bridge? 
                     </p>
                     <div class="checkbox">
-                        <input id="checkbox21" type="checkbox">
+                        <input id="checkbox21" type="radio" name="play_frequency" value="1">
                         <label for="checkbox21">
                             1 - 5 Times Per Month
                         </label>
                     </div>
                     <div class="checkbox checkbox-primary">
-                        <input id="checkbox22" type="checkbox">
+                        <input id="checkbox22" type="radio" name="play_frequency" value="6">
                         <label for="checkbox22">
                             6 - 10 Times Per Month
                         </label>
                     </div>
                     <div class="checkbox checkbox-success">
-                        <input id="checkbox23" type="checkbox">
+                        <input id="checkbox23" type="radio" name="play_frequency" value="11">
                         <label for="checkbox23">
                              11 - 20 Times Per Month
                         </label>
                     </div>
                     <div class="checkbox checkbox-info">
-                        <input id="checkbox24" type="checkbox">
+                        <input id="checkbox24" type="radio" name="play_frequency" value="21">
                         <label for="checkbox24">
                             21+ Times Per Month
                         </label>
                     </div>
-                 
-            </div>
-                </fieldset>
-            </div>
-           
-        </div>
-    </form>
-     <form role="form">
-        <div class="row">
-            <div class="col-md-8">
-                <fieldset>
+                 </fieldset>
+
+                 <!-- input mid question below this -->
+                 <!-- <fieldset>
                     
                     <p>
                         Where Do you Play Bridge? (Select All That Apply)
@@ -642,92 +657,77 @@
                         
                     
             </div>
-                </fieldset>
-            </div>
-           
-        </div>
-    </form>
-    
-       <form role="form">
-        <div class="row">
-            <div class="col-md-8">
-                <fieldset>
+                </fieldset> -->
+
+                <!-- mid code ends here -->
+
+
+
+                 <fieldset>
                     
                     <p>
                         How Would You classify Your Current Bridge Skills? 
                     </p>
                     <div class="checkbox">
-                        <input id="checkbox31" type="checkbox">
+                        <input id="checkbox31" type="radio" name="skill_level" value="N">
                         <label for="checkbox31">
                             Just Learning
                         </label>
                     </div>
                     <div class="checkbox checkbox-primary">
-                        <input id="checkbox32" type="checkbox">
+                        <input id="checkbox32" type="radio" name="skill_level" value="B">
                         <label for="checkbox32">
                             Advanced Beginner
                         </label>
                     </div>
                     <div class="checkbox checkbox-success">
-                        <input id="checkbox33" type="checkbox">
+                        <input id="checkbox33" type="radio" name="skill_level" value="I">
                         <label for="checkbox33">
                              Intermediate Beginner
                         </label>
                     </div>
                     <div class="checkbox checkbox-info">
-                        <input id="checkbox34" type="checkbox">
+                        <input id="checkbox34" type="radio" name="skill_level" value="A">
                         <label for="checkbox34">
                             Advanced
                         </label>
                     </div>
                 </fieldset> 
-            </div>
-            </div>
-            </form>
-
-
-            <form role="form">
-        <div class="row">
-            <div class="col-md-8">
                 <fieldset>
                     
                     <p>
                         How Many Master Points Do You Have?  
                     </p>
                     <div class="checkbox">
-                        <input id="checkbox41" type="checkbox">
+                        <input id="checkbox41" type="radio" name="master_points" value="0">
                         <label for="checkbox41">
                             0 - 50
                         </label>
                     </div>
                     <div class="checkbox checkbox-primary">
-                        <input id="checkbox42" type="checkbox">
+                        <input id="checkbox42" type="radio" name="master_points" value="51">
                         <label for="checkbox42">
                             51 - 100
                         </label>
                     </div>
                     <div class="checkbox checkbox-success">
-                        <input id="checkbox43" type="checkbox">
+                        <input id="checkbox43" type="radio" name="master_points" value="101">
                         <label for="checkbox43">
                              101 - 300
                         </label>
                     </div>                    
                 </fieldset> 
-            </div>
-            </div>
-            </form>
+                <!--  <fieldset>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label" for="textinput" style="text-align: left;">If You Have An ACBL# Please Insert It Here.</label>
+                      <div class="col-sm-8">
+                        <input type="text" placeholder="ACBL# " class="form-control">
+                      </div>
+                    </div>
+                 </fieldset> -->
 
 
-            <form class="form-horizontal" role="form">
-        <fieldset>
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="textinput" style="text-align: left;">If You Have An ACBL# Please Insert It Here.</label>
-                <div class="col-sm-8">
-                  <input type="text" placeholder="ACBL# " class="form-control">
-                </div>
-              </div>
-              </fieldset>
-              <fieldset>
+                 <fieldset>
                   <div class="form-group">
                       <div class="col-sm-10">
                         <div class="pull-right">                      
@@ -736,7 +736,19 @@
                       </div>
                     </div>
                 </fieldset>
-              </form>       
+            </div>
+                
+            </div>
+           
+        </div>
+    </form>
+
+
+
+     
+    
+       
+
         </div>
    
 
