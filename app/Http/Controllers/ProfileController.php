@@ -134,7 +134,7 @@ class ProfileController extends Controller
         $profile->save();
 
         //redirect to other page
-        return redirect()->route('profile');
+        return redirect()->route('profile')->with('success','You have sucessfully updated member profile');
     }
 
     

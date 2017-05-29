@@ -61,26 +61,43 @@
                             <ul class="nav navbar-nav navbar-right">
                               <li class="hidden">
                                     <a href="#page-top"></a>
-                                </li>                                
+                                </li>  
+                                <li class="page-scroll dropdown">
+                                    <a class="dropdown-toggle menudrop" data-toggle="dropdown" href="#">Classes & Games
+                                    <span class="caret"></span></a>
+                                    <ul class="dropdown-menu menudrop1">
+                                      <li><a href="{{ route('clubs.index') }}">Manage Clubs</a></li>
+                                      <li><a href="{{ route('categories.index') }}">Manage Category</a></li>
+                                      <li><a href="{{ route('classes.index') }}">Manage Classes</a></li>
+                                      <li><a href="{{ route('games.index') }}">Manage Games</a></li>
+                                    </ul>
                                 </li>
-                                  <li class="page-scroll">
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();" data-toggle="modal" data-target="#myModal">
-                                            Logout
-                                        </a>
+                                <li class="page-scroll dropdown">
+                                    <a class="dropdown-toggle menudrop" data-toggle="dropdown" href="#">Enrollments
+                                    <span class="caret"></span></a>
+                                    <ul class="dropdown-menu menudrop1">
+                                      <li><a href="#">For Classes</a></li>
+                                      <li><a href="#">For Games</a></li>
+                                    </ul>
+                                </li>
+                                <li class="page-scroll">
+                                    <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();" data-toggle="modal" data-target="#myModal">
+                                        Logout
+                                    </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
                             </ul>
                         @endif
                     </ul>
                 </div>
             </div>
         </nav>
-
+        @include('flash-message')       
         @yield('content')
     </div>
 

@@ -46,8 +46,11 @@ Route::resource('workshops', 'WorkshopController');
 Route::resource('teacher', 'TeacherController');
 Route::resource('unitadmins', 'UnitadminController');
 Route::resource('manager', 'ManagerController');
-Route::post('unitadmin', 'UnitAdminController@store')->name('unitadmin.store');
-Route::post('unitadminn', 'UnitAdminController@store1')->name('unitadmin.store1');
+Route::resource('userlist', 'UserlistController');
+Route::post('unitadmin', 'UnitadminController@store')->name('unitadmin.store');
+Route::post('unitadminn', 'UnitadminController@store1')->name('unitadmin.store1');
+Route::get('unitadmin', 'UnitadminController@create1')->name('unitadmin.create1');
+
 
 Route::resource('categories', 'Class_categoryController');
 Route::resource('subscription', 'Class_subscriptionController');

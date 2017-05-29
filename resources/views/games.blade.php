@@ -36,12 +36,18 @@
                 <h5 class="text-uppercase sport1">{{ $value->game_name }}</h5>
             </div>
             <div class="col-md-6"><p class="text-uppercase">{{ $value->game_description }}</p></div>
-            <div class="col-md-3"><a href="{!! route('enroll.show', $value['id']) !!}"><button type="button" class="btn btn-primary">Enroll</button></a></div>
+            <div class="col-md-3"><a href="{!! route('enroll.show', $value['id']) !!}"><button type="button" class="btn btn-primary">Learn More</button></a></div>
         </div>
         @endforeach 
     </div>
 </div>    
-
+<div class="row full1">
+    <div class="mid-section" style="margin-top: 100px;">   
+        <div class="col-md-12" style="text-align: center;margin-bottom: 50px;">
+            <a href="{!! route('enroll.index') !!}"><button type="button" class="btn btn-primary sp">Manage Subscription</button></a>
+        </div>
+    </div>
+</div>
         
 
 

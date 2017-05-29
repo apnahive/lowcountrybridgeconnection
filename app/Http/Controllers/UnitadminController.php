@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Teacher;
 use App\Manager;
@@ -27,7 +28,8 @@ class UnitadminController extends Controller
      */
     public function index()
     {        
-        return view('unitadmins.index');
+        $user = Auth::user();
+        return view('unitadmins.index',  ['user' => $user]);
     }
 
 
@@ -40,6 +42,10 @@ class UnitadminController extends Controller
     public function create()
     {
         return view('unitadmins.create'); 
+    }
+    public function create1()
+    {
+        return view('unitadmins.createm'); 
     }
 
     /**
@@ -68,7 +74,7 @@ class UnitadminController extends Controller
         $teacher->save();
 
         //redirect to other page
-        return redirect()->route('unitadmins.index');
+        return redirect()->route('unitadmins.index')->with('success','You have sucessfully created a teacher');
 
     }
     public function store1(Request $request)
@@ -92,7 +98,7 @@ class UnitadminController extends Controller
         $manager->save();
 
         //redirect to other page
-        return redirect()->route('unitadmins.index');
+        return redirect()->route('unitadmins.index')->with('success','You have sucessfully created a manager');
 
 
     }
@@ -141,4 +147,5 @@ class UnitadminController extends Controller
     {
         //
     }
+   
 }

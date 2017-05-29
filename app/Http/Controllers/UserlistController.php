@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Class_category;
+use App\Teacher;
+use App\Manager;
 
-class Class_categoryController extends Controller
+class UserlistController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,10 @@ class Class_categoryController extends Controller
      */
     public function index()
     {
-        $categories = Class_category::all();  
-       return view('categories.index', compact('categories'));
+        //
+        $teacher = Teacher::all();  
+        $manager = Manager::all();  
+        return view('userlist.index', compact('teacher'), compact('manager')); 
     }
 
     /**
@@ -25,7 +28,7 @@ class Class_categoryController extends Controller
      */
     public function create()
     {
-        return view('categories.create');  
+        //
     }
 
     /**
@@ -36,21 +39,7 @@ class Class_categoryController extends Controller
      */
     public function store(Request $request)
     {
-        //dd(request()->all());
-        //validate the data
-        $this->validate($request, array(
-            'category_name'=> 'required|max:255'            
-        ));
-
-        //store in database
-        $category = new Class_category;
-
-        $category->category_name = $request->category_name;
-        
-        $category->save();
-
-        //redirect to other page
-        return redirect()->route('categories.index')->with('success','category is created successfully!');
+        //
     }
 
     /**
@@ -61,7 +50,6 @@ class Class_categoryController extends Controller
      */
     public function show($id)
     {
-        //return view('categories.index', ['category' => Classroom::findOrFail($id)]);
         //
     }
 
@@ -72,10 +60,8 @@ class Class_categoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    { 
-        $categories = Class_category::find($id);
-        
-        return view('categories.edit', ['categories' => $categories]);
+    {
+        //
     }
 
     /**
@@ -87,19 +73,7 @@ class Class_categoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $this->validate($request, array(
-            'category_name'=> 'required|max:255'            
-        ));
-
-        $category = Class_category::find($id);
-
-        $category->category_name = $request->input('category_name');
-
-        $category->save();
-
-        //redirect to other page
-        return redirect()->route('categories.index')->with('success','Category has successfully updated!');
+        //
     }
 
     /**

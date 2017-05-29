@@ -90,7 +90,7 @@ class ClassroomController extends Controller
         $class->save();
 
         //redirect to other page
-        return redirect()->route('classes.show',$class->id);
+        return redirect()->route('classes.show',$class->id)->with('success','You have sucessfully created the class');
     }
 
     /**
@@ -164,7 +164,7 @@ class ClassroomController extends Controller
         $class->save();
 
         //redirect to other page
-        return redirect()->route('classes.show',$class->id);
+        return redirect()->route('classes.show',$class->id)->with('success','You have sucessfully updated the class');
     }
 
     /**

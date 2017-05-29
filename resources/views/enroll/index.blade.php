@@ -7,7 +7,7 @@
         <div class="col-md-10 col-md-offset-1">
             <a href="{{ URL::previous() }}"><button type="button" class="btn btn-lg btn-info">Back</button></a>
             <div class="panel panel-default" style="margin-top: 30px;">
-                <div class="panel-heading">Classes Subscribed</div>
+                <div class="panel-heading">Games Subscribed</div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-2">#</div>

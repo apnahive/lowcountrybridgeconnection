@@ -69,7 +69,7 @@ class ManagerController extends Controller
         
 
         //redirect to other page
-        return redirect()->route('manager.index'); 
+        return redirect()->route('manager.index')->with('success','You have sucessfully updated manager details'); 
     }
     public function store(Request $request)
     {
@@ -92,7 +92,7 @@ class ManagerController extends Controller
         $manager->save();
 
         //redirect to other page
-        return redirect()->route('unitadmin.index');
+        return redirect()->route('unitadmin.index')->with('success','You have sucessfully created the manager');
     }
 
 }

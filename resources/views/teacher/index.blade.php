@@ -25,13 +25,6 @@
         <div class="col-md-4"><a href="{{ route('teacher.edit', $user->id) }}"><button type="button" class="btn btn-primary">Edit profile</button></a></div>
       </div>
         </section>
-        
-                </div>
-            </div>
-        </div>
-    </div>
-   
-</div>
 <br>
 <br>
 

@@ -39,7 +39,7 @@
                                         {{ $value->class_name }}
                                     </div>
                                     <div class="col-md-6 right1">
-                                        <a href="{!! route('subscription.update', $value['id']) !!}"><button type="button" class="btn btn-primary sp">Join Now</button></a>
+                                        <a href="{!! route('subscription.update', $value['id']) !!}"><button type="button" class="btn btn-primary sp">Learn More</button></a>
                                     </div>
                                 </div>
                             @endif
@@ -48,7 +48,14 @@
             @endforeach  
             </div>
         </div>    
-             
+        <div class="row full1">
+            <div class="mid-section" style="margin-top: 100px;">   
+                <div class="col-md-12" style="text-align: center;margin-bottom: 50px;">
+                    <a href="{!! route('subscription.index') !!}"><button type="button" class="btn btn-primary sp">Manage Subscription</button></a>
+                </div>
+            </div>
+        </div>
+
 
         
 

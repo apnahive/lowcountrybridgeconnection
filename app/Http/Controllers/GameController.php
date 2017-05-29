@@ -77,7 +77,7 @@ class GameController extends Controller
         $game->save();
 
         //redirect to other page
-        return redirect()->route('games.show', $game->id);
+        return redirect()->route('games.show', $game->id)->with('success','You have sucessfully created a game');
     }
 
     /**
@@ -141,7 +141,7 @@ class GameController extends Controller
         $game->save();
 
         //redirect to other page
-        return redirect()->route('games.show',$game->id);
+        return redirect()->route('games.show',$game->id)->with('success','You have sucessfully updated the game');
     }
 
     /**

@@ -47,6 +47,6 @@ class SuperadminController extends Controller
         $unitadmin->save();
 
         //redirect to other page
-        return redirect()->route('superadmin');
+        return redirect()->route('superadmin')->with('success','You have sucessfully created Unit Admin');
     }
 }

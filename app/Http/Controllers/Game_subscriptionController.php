@@ -88,7 +88,8 @@ class Game_subscriptionController extends Controller
         $id1 = Auth::id();
         $games = Game::all();
         $game_subscription = Game_subscription::where('user_id', $id1)->get(); 
-        return view('enroll.index', compact('games'), compact('game_subscription')); 
+        //return view('enroll.index', compact('games'), compact('game_subscription')); 
+        return redirect()->route('enroll.index')->with('success','You have sucessfully unsubscribed the game');
     }
 
     /**
@@ -116,7 +117,7 @@ class Game_subscriptionController extends Controller
         $game_enroll->save();
 
         //
-        return redirect()->route('gamelist'); 
+        return redirect()->route('gamelist')->with('success','You have sucessfully subscribed for the game'); 
     }
 
     /**

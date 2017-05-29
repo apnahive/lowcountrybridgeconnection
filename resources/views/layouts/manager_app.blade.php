@@ -80,6 +80,7 @@
                 </div>
             </div>
         </nav>
+        @include('flash-message')       
 
         @yield('content')
     </div>

@@ -5,17 +5,19 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Create Teacher</div>
+                <div class="panel-heading">Create Manager</div>
 
-                <div class="panel-body">
-                    <!-- You are logged in as <strong>Unit admin</strong>! -->
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('unitadmin.store') }}">
+                <div class="panel-body">                   
+                    
+                                            <!-- Create a manager -->
+
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('unitadmin.store1') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Teacher Name</label>
+                            <label for="name" class="col-md-4 control-label">Manager Name</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <input id="name" type="text" class="form-control" name="name" value="" required autofocus>
 
                                 @if ($errors->has('name'))
@@ -29,7 +31,7 @@
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">Email</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <input id="email" type="text" class="form-control" name="email" value="" required autofocus>
 
                                 @if ($errors->has('email'))
@@ -43,7 +45,7 @@
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <input id="password" type="password" class="form-control" name="password" value="" required autofocus>
 
                                 @if ($errors->has('password'))
@@ -57,13 +59,14 @@
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Create Teacher
+                                    Create Manager
                                 </button>
 
                                 
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>

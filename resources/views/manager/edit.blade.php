@@ -12,7 +12,7 @@
 
                 <div class="container" style="width: 100%;">
                     <div class="row" style="width: 100%;">
-                        <div class="col-lg-12 col-md-5 col-sm-8 col-xs-9 bhoechie-tab-container" style="margin: 0;">
+                        <div class="col-lg-12 bhoechie-tab-container" style="margin: 0;">
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
                               <div class="list-group">
                                 <a href="#" class="list-group-item active text-center">

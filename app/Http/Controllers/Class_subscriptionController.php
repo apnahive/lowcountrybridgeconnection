@@ -9,6 +9,7 @@ use App\Class_subscription;
 use App\Waitlist_subscription;
 use Illuminate\Support\Facades\Auth;
 
+
 class Class_subscriptionController extends Controller
 {
     /**
@@ -68,6 +69,9 @@ class Class_subscriptionController extends Controller
     {
         //if subscription_status is true
         $sub = Class_subscription::find($id);
+        $id1 = Auth::id();
+        $classes = Classroom::all();
+        $class_subscription = Class_subscription::where('user_id', $id1)->get(); 
         if($sub->subscription_status)
         {
             $sub->subscription_status = false;
@@ -84,11 +88,14 @@ class Class_subscriptionController extends Controller
             $class2->seats_booked = $class2->seats_booked-1;
             $class2->seats_available = $class2->seats_available+1;
             $class2->save();
+            return redirect()->route('subscription.index')->with('success','You have sucessfully unsubscribed a class!');        
         }
-        $id1 = Auth::id();
-        $classes = Classroom::all();
-        $class_subscription = Class_subscription::where('user_id', $id1)->get(); 
-        return view('subscription.index', compact('classes'), compact('class_subscription'));        
+        else
+        {
+            return redirect()->route('subscription.index')->with('error','Error! cannot unsubscribe class');           
+        }
+        
+        
     }
 
     /**
@@ -118,6 +125,8 @@ class Class_subscriptionController extends Controller
             $class_sub->subscription_status = true;
 
             $class_sub->save();
+            return redirect()->route('classlist'); 
+            //->with('success','You have sucessfully subscribed the class')
         }
         else
         {
@@ -134,11 +143,12 @@ class Class_subscriptionController extends Controller
             //$wait->subscription_status = true;
 
             $wait->save();
+            return redirect()->route('classlist')->with('info','You have been added to the waiting list of the class'); 
 
         }
 
         //
-        return redirect()->route('classlist'); 
+        
     }
 
     /**
@@ -155,15 +165,7 @@ class Class_subscriptionController extends Controller
 
     public function cancelsubscription(Request $request, $id)
     {
-        dd(request()->all());   
-        $sub = Class_subscription::find($id);
         
-        $sub->subscription_status = false;
-
-        $sub->save();
-
-        notify()->flash('Deleted','error',['text' => 'Word Deleted Succesfully']);
-        return redirect('subscription.index');
         //
     }
     

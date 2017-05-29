@@ -15,6 +15,8 @@ class ClubController extends Controller
     public function index()
     {
         //
+        $clubs = Club::all();  
+       return view('clubs.index', compact('clubs'));
     }
 
     /**
@@ -51,7 +53,7 @@ class ClubController extends Controller
         $club->save();
 
         //redirect to other page
-        return redirect()->route('clubs.show',$club->id);
+        return redirect()->route('clubs.show',$club->id)->with('success','You have sucessfully created club');
     }
 
     /**
@@ -74,6 +76,9 @@ class ClubController extends Controller
     public function edit($id)
     {
         //
+        $clubs = Club::find($id);
+        
+        return view('clubs.edit', ['clubs' => $clubs]);
     }
 
     /**
@@ -86,6 +91,18 @@ class ClubController extends Controller
     public function update(Request $request, $id)
     {
         //
+         $this->validate($request, array(
+            'club_name'=> 'required|max:255',
+            'city'=> 'required|max:255'            
+        ));
+
+        $clubs = Club::find($id);
+
+        $clubs->club_name = $request->input('club_name');
+        $clubs->city = $request->input('city');
+
+        $clubs->save();
+        return redirect()->route('clubs.index')->with('success','You have sucessfully updated club');
     }
 
     /**
