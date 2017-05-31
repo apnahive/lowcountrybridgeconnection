@@ -114,6 +114,7 @@ class Game_subscriptionController extends Controller
         $game_enroll->user_id = $id1;
         $game_enroll->subscription_id = uniqid('gs',true);
         $game_enroll->subscription_status = true;
+        $game_enroll->is_member = true;
         $game_enroll->save();
 
         //

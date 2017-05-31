@@ -112,10 +112,7 @@ class Class_subscriptionController extends Controller
         //$a = $classes->seats_booked;
         if($classes->seats_available)
         {
-            $classes->seats_booked = $classes->seats_booked+1;
-            $classes->seats_available = $classes->seats_available-1;
-            $classes->save();
-
+           
             $class_sub = new Class_subscription;
             $id1 = Auth::id();
 
@@ -123,6 +120,12 @@ class Class_subscriptionController extends Controller
             $class_sub->user_id = $id1;
             $class_sub->subscription_id = uniqid('sb',true);
             $class_sub->subscription_status = true;
+            $class_sub->is_member = true;
+
+            $classes->seats_booked = $classes->seats_booked+1;
+            $classes->seats_available = $classes->seats_available-1;
+            $classes->save();
+
 
             $class_sub->save();
             return redirect()->route('classlist'); 

@@ -61,8 +61,16 @@
                             <ul class="nav navbar-nav navbar-right">
                               <li class="hidden">
                                     <a href="#page-top"></a>
-                                </li>                                
-                                </li>
+                                </li> 
+                                 <li class="page-scroll">
+                                <a href="{{ route('games.index') }}">Manage Games</a>
+                              </li>
+                              <li class="page-scroll">
+                                <a href="{{ route('players.index') }}">Manage Enrollments</a>
+                              </li>
+                              <li class="page-scroll">
+                                <a href="{{ route('players.index') }}">Manage Players</a>
+                              </li>
                                   <li class="page-scroll">
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

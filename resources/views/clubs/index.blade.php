@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <a href=""><button type="button" class="btn btn-lg btn-info">Back</button></a>
-            <a href="/categories/create" class="pull-right"><button type="button" class="btn btn-lg btn-info pull-right">Add a new class</button></a>
+            <a href="{{ route('clubs.create') }}" class="pull-right"><button type="button" class="btn btn-lg btn-info pull-right">Add a new club</button></a>
             <div class="panel panel-default" style="margin-top: 30px;">
                 <div class="panel-heading">Available Clubs</div>
                 <div class="panel-body">

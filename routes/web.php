@@ -17,35 +17,57 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
+//members 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/classlist', 'HomeController@showClass')->name('classlist');
 Route::get('/gamelist', 'HomeController@showGame')->name('gamelist');
 Route::get('/profile', 'HomeController@showProfile')->name('profile');
 Route::get('/contact', 'HomeController@showContact')->name('contact');
 Route::get('/news', 'HomeController@showNews')->name('news');
-
-//Route::get('/manager', 'ManagerController@index')->name('manager');
 Route::get('/email', 'HomeController@email')->name('sendEmail');
-Route::get('/superadmin/login', 'SuperAdminLoginController@showLoginForm')->name('superadmin.login');
-Route::post('/superadmin/login', 'SuperAdminLoginController@login')->name('superadmin.login.submit');
-Route::get('/superadmin', 'SuperadminController@index')->name('superadmin');
-Route::get('/unitadmin/login', 'UnitAdminLoginController@showLoginForm')->name('unitadmin.login');
-Route::post('/unitadmin/login', 'UnitAdminLoginController@login')->name('unitadmin.login.submit');
-//Route::get('/unitadmin', 'UnitadminController@index')->name('unitadmin');
+Route::resource('profiles', 'ProfileController');
+Route::resource('workshops', 'WorkshopController');
+
+
+//teacher
 Route::get('/teacher/login', 'TeacherLoginController@showLoginForm')->name('teacher.login');
 Route::post('/teacher/login', 'TeacherLoginController@login')->name('teacher.login.submit');
 //Route::get('/teacher', 'TeacherController@index')->name('teacher');
+Route::resource('classes', 'ClassroomController');
+Route::resource('teacher', 'TeacherController');
+Route::resource('players', 'PlayerController');
+Route::resource('playerclass', 'Playerclass_subscriptionController');
+
+//manager
+
+//Route::get('/manager', 'ManagerController@index')->name('manager');
 Route::get('/manager/login', 'ManagerLoginController@showLoginForm')->name('manager.login');
 Route::post('/manager/login', 'ManagerLoginController@login')->name('manager.login.submit');
 Route::get('/manager', 'ManagerController@index')->name('manager');
-Route::resource('profiles', 'ProfileController');
-Route::resource('classes', 'ClassroomController');
 Route::resource('games', 'GameController');
-Route::resource('clubs', 'ClubController');
-Route::resource('workshops', 'WorkshopController');
-Route::resource('teacher', 'TeacherController');
-Route::resource('unitadmins', 'UnitadminController');
 Route::resource('manager', 'ManagerController');
+Route::resource('playergame', 'Playergame_subscriptionController');
+
+//unitadmin
+Route::get('/unitadmin/login', 'UnitAdminLoginController@showLoginForm')->name('unitadmin.login');
+Route::post('/unitadmin/login', 'UnitAdminLoginController@login')->name('unitadmin.login.submit');
+//Route::get('/unitadmin', 'UnitadminController@index')->name('unitadmin');
+Route::resource('clubs', 'ClubController');
+Route::resource('unitadmins', 'UnitadminController');
+
+//superadmin
+Route::get('/superadmin/login', 'SuperAdminLoginController@showLoginForm')->name('superadmin.login');
+Route::post('/superadmin/login', 'SuperAdminLoginController@login')->name('superadmin.login.submit');
+Route::get('/superadmin', 'SuperadminController@index')->name('superadmin');
+
+
+
+
+
+
+
+
 Route::resource('userlist', 'UserlistController');
 Route::post('unitadmin', 'UnitadminController@store')->name('unitadmin.store');
 Route::post('unitadminn', 'UnitadminController@store1')->name('unitadmin.store1');
