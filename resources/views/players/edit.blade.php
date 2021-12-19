@@ -7,22 +7,22 @@
         <div class="col-md-8 col-md-offset-2">
             <a href="{{ URL::previous() }}"><button type="button" class="btn btn-lg btn-info">Back</button></a>            
             <div class="panel panel-default" style="margin-top: 30px;">
-                <div class="panel-heading">Edit Class</div>
+                <div class="panel-heading">Edit Player</div>
                 <div class="panel-body">
                
-                    <form class="form-horizontal" role="form" method="POST" action="{!! route('players.update', $players['id']) !!}">
+                    <form class="form-horizontal" role="form" method="POST" action="{!! route('manage_students.update', $players['id']) !!}">
                         <input type="hidden" name="_method" value="PUT">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                        <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
-                            <label for="firstname" class="col-md-4 control-label">First Name</label>
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            <label for="name" class="col-md-4 control-label">First Name</label>
 
                             <div class="col-md-6">
-                                <input id="firstname" type="text" class="form-control" name="firstname" value="{{ old('firstname', $players['firstname']) }}" required autofocus>
+                                <input id="name" type="text" class="form-control" name="name" value="{{ old('firstname', $players['name']) }}" required autofocus>
 
-                                @if ($errors->has('firstname'))
+                                @if ($errors->has('name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('firstname') }}</strong>
+                                        <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -70,15 +70,5 @@
     </div>
 </div>
 <!-- Footer -->
-<footer class="text-center">
-    <div class="footer-below">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    Copyright © The Low Country Bridge Connection 2017
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+
 @endsection

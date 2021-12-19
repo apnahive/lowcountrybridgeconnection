@@ -67,7 +67,7 @@ class TeacherController extends Controller
         }    
 
         //redirect to other page
-        return redirect()->route('teacher.index')->with('success','You have sucessfully updated teacher details'); 
+        return redirect()->route('teacher.index')->with('success','You have successfully updated teacher details'); 
     }
     public function store(Request $request)
     {
@@ -90,7 +90,7 @@ class TeacherController extends Controller
         $teacher->save();
 
         //redirect to other page
-        return redirect()->route('unitadmin.index')->with('success','You have sucessfully created a teacher');
+        return redirect()->route('unitadmin.index')->with('success','You have successfully created a teacher');
     }
 
 }

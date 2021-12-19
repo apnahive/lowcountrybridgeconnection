@@ -13,22 +13,58 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">    
     <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/parsley.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('css/parsley.css') }}" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+   <!--  <link href="https://file.myfontastic.com/L5n9XdpeNwyXo2NCa5zchX/icons.css" rel="stylesheet"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.js"></script>
+    
     <!-- Scripts -->
+    
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
 
+    <style type="text/css">
+        @media (max-width: 991px) {
+            .navbar-header {
+                float: none;
+            }
+            .navbar-toggle {
+                display: block;
+            }
+            .navbar-collapse {
+                border-top: 1px solid transparent;
+                box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+            }
+            .navbar-collapse.collapse {
+                display: none!important;
+            }
+            .navbar-nav {
+                float: none!important;
+                margin: 7.5px -15px;
+            }
+            .navbar-nav>li {
+                float: none;
+            }
+            .navbar-nav>li>a {
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+           .navbar-collapse.collapse.in {  /* NEW */
+                display: block!important; 
+            }
+        }  
+    </style>
 
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top navbar-custom">
-            <div class="container">
+        <nav class="navbar navbar-default navbar-static-top navbar-custom" style="padding-bottom: 0px;padding-top: 0px;">
+            <div class="container containmenu">
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
@@ -40,7 +76,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="fa fa-home navbar-brand" href="{{ url('/') }}">
+                    <a class="fa fa-home navbar-brand" href="{{ url('/news') }}">
                         
                     </a>
                 </div>
@@ -55,32 +91,90 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <!-- <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Register</a></li> -->
+                            <!-- <li class="page-scroll dropdown">
+                                <a class="dropdown-toggle menudrop" data-toggle="dropdown" href="">Staff Login
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu menudrop1">
+                                  <li><a href="/teacher/login">Teacher</a></li>
+                                  <li><a href="/manager/login">Manager</a></li>
+                                  <li><a href="/unitadmin/login">Unit Admin</a></li>
+                                </ul>
+                            </li> -->
+                            <ul class="nav navbar-nav navbar-right dropmenu" style="border: 2px white solid;border-bottom-width: 0;border-top-width: 0;">
+                            <li class="page-scroll dropdown">
+                                <a class="dropdown-toggle menudrop" data-toggle="dropdown" href="#">Staff Login
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu menudrop1">
+                                  <li><a href="/teacher/login">Teacher</a></li>
+                                  <li><a href="/manager/login">Manager</a></li>
+                                  <li><a href="/unitadmin/login">Unit Admin</a></li>
+                                </ul>
+                            </li> 
+                        </ul>
+                            <ul class="nav navbar-nav navbar-right mobile" style="border: 2px white solid;border-bottom-width: 0;border-top-width: 0;">
+                                
+                                  <li class="page-scroll"><a href="/teacher/login">Teacher</a></li>
+                                  <li class="page-scroll"><a href="/manager/login">Manager</a></li>
+                                  <li class="page-scroll"><a href="/unitadmin/login">Unit Admin</a></li>
+                                
+                            </ul>
                         @else
-                            <ul class="nav navbar-nav navbar-right">
+                            <ul class="nav navbar-nav navbar-right dropmenu" style="border: 2px white solid;border-bottom-width: 0;border-top-width: 0;">
                               <li class="hidden">
-                                    <a href="#page-top"></a>
+                                    <!-- <a href="#page-top"></a> -->
                                 </li>
+                                 <li class="page-scroll">
+                                    <a href="{{ route('profile') }}">Profile</a>
+                                </li> 
                                 <li class="page-scroll">
-                                    <a href="{{ route('home') }}">Home</a>
-                                </li>
-                                <li class="page-scroll">
-                                    <a href="{{ route('news') }}">LOCATIONS-NEWS-INFORMATION</a>
-                                </li>
-                                <li class="page-scroll">
-                                    <a href="{{ route('profile') }}">PROFILE</a>
+                                    <a href="{{ route('news') }}">Clubs</a>
                                 </li>
                                 <li class="page-scroll">
                                     <a href="{{ route('classlist') }}">CLASSES</a>
-                                </li>
+                                </li>                                
                                 <li class="page-scroll">
                                     <a href="{{ route('gamelist') }}">GAMES</a>
                                 </li>
+                                 
+                                <!-- <li class="page-scroll">
+                                    <a href="{{ route('profile') }}">PROFILE</a>
+                                </li> -->
                                 <li class="page-scroll">
-                                    <a href="{{ route('contact') }}">CONTACT</a>
+                                    <a class="dropdown-toggle menudrop" data-toggle="dropdown" href="javascript:void(0)">Your Enrollment
+                                  <span class="caret"></span></a>
+                                  <ul class="dropdown-menu menudrop1">
+                                    <li><a href="{{ route('seriesenroll') }}">Your Series Enrollment</a></li>
+                                    <li><a href="{{ route('class_enrollment.index') }}">Your Class Enrollment</a></li>           
+                                    <li><a href="{{ route('game_enrollment.index') }}">Your Game Enrollment</a></li>
+                                    <li><a href="{{ route('waitlist') }}">Your waitlist</a></li>
+                                  </ul>
+
+                                    
                                 </li>
-                                  <li class="page-scroll">
+                                
+                               
+                                <li class="page-scroll">
+                                    <a href="{{ route('contact') }}">Contact</a>
+                                </li> <li class="page-scroll">
+                                    <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();" data-toggle="modal" data-target="#myModal">
+                                            Logout
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                </li>                                 
+                                <!-- <li class="page-scroll">
+                                    <a class="dropdown-toggle menudrop" data-toggle="dropdown" href="">{{ Auth::user()->name }}
+                                  <span class="caret"></span></a>
+                                  <ul class="dropdown-menu menudrop1">
+                                    <li><a href="{{ route('profile') }}">Profile</a></li>
+                                    <li><a href="{{ route('contact') }}">Contact</a></li>
+                                    <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" data-toggle="modal" data-target="#myModal">
@@ -91,6 +185,51 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
+                                  </ul>
+                              </li> -->
+
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right mobile" style="border: 2px white solid;border-bottom-width: 0;border-top-width: 0;">
+                                <li class="page-scroll">
+                                    <a href="{{ route('profile') }}">Profile</a>
+                                </li>
+                                <li class="page-scroll">
+                                    <a href="{{ route('news') }}">Clubs</a>
+                                </li>
+                                <li class="page-scroll">
+                                    <a href="{{ route('classlist') }}">CLASSES</a>
+                                </li>                                
+                                <li class="page-scroll">
+                                    <a href="{{ route('gamelist') }}">GAMES</a>
+                                </li>
+                                <li class="page-scroll">
+                                    <a href="{{ route('seriesenroll') }}">Your Series Enrollment</a>
+                                </li>
+                                <li class="page-scroll">
+                                    <a href="{{ route('class_enrollment.index') }}">Your Class Enrollment</a>
+                                </li>
+                                <li class="page-scroll">
+                                    <a href="{{ route('game_enrollment.index') }}">Your Game Enrollment</a>
+                                </li>
+                                <li class="page-scroll">
+                                    <a href="{{ route('waitlist') }}">Your waitlist</a>
+                                </li>                                
+                                
+                                
+                                <li class="page-scroll">
+                                    <a href="{{ route('contact') }}">Contact</a>
+                                </li>
+                                <li class="page-scroll">
+                                    <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();" data-toggle="modal" data-target="#myModal">
+                                            Logout
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                </li>
                             </ul>
                         @endif
                     </ul>
@@ -100,6 +239,19 @@
         @include('flash-message')       
 
         @yield('content')
+
+        <footer class="text-center">
+            <div class="footer-below">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            Copyright © Lowcountry Bridge Connection 2017
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Design by - Banditcodes -->
     </div>
 
     <!-- Modal -->
@@ -113,7 +265,7 @@
             <h4 class="modal-title">Logging Out</h4>
           </div>
           <div class="modal-body">
-            <p>You have been logged out Sucessfully </p>
+            <p>You have been logged out Successfully </p>
           </div>           
         </div>
 
@@ -124,9 +276,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
 
-    <script src="{{ asset('js/freelancer.js') }}"></script>
-    <script src="{{ asset('js/parsley.min.js') }}"></script>
+     <script src="{{ asset('js/freelancer.js') }}"></script>
+    <!-- <script src="{{ asset('js/parsley.min.js') }}"></script> --> 
 </body>
 </html>

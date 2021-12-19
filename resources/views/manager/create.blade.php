@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.manager_app')
 
 @section('content')
 
@@ -64,7 +64,7 @@
                             <label for="class_from" class="col-md-4 control-label">From Date</label>
 
                             <div class="col-md-6">
-                                <input id="class_from" type="date" class="form-control" name="class_from" value="{{ old('class_from') }}" required autofocus>
+                                <input id="class_from" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" name="class_from" value="{{ old('class_from') }}" required autofocus>
 
                                 @if ($errors->has('class_from'))
                                     <span class="help-block">
@@ -78,7 +78,7 @@
                             <label for="class_till" class="col-md-4 control-label">Till Date</label>
 
                             <div class="col-md-6">
-                                <input id="class_till" type="date" class="form-control" name="class_till" value="{{ old('class_till') }}" required autofocus>
+                                <input id="class_till" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" name="class_till" value="{{ old('class_till') }}" required autofocus>
 
                                 @if ($errors->has('class_till'))
                                     <span class="help-block">
@@ -108,7 +108,7 @@
                             <div class="col-md-6">
                                 <div class="form-group" style="margin: 0;">                                    
                                     <select class="custom-select form-control" id="payment_option" name="payment_option">
-                                      <option selected>Choose...</option>
+                                      <!-- <option selected>Choose...</option> -->
                                       <option value="Prepayment required">Prepayment required</option>
                                       <option value="Bring Cash or Check">Bring Cash or Check</option>
                                       <option value="Full Series">Full Series</option>
@@ -154,15 +154,5 @@
     </div>
 </div>
 <!-- Footer -->
-<footer class="text-center">
-    <div class="footer-below">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    Copyright © The Low Country Bridge Connection 2017
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+
 @endsection

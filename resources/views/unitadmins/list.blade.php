@@ -1,4 +1,4 @@
-@extends('layouts.manage_app')
+@extends('layouts.unitadmin')
 
 @section('content')
 
@@ -23,7 +23,7 @@
                     <div class="row" style="margin-top: 15px;">
                         <div class="col-md-2">{{ $value->id }}</div>
                         <div class="col-md-3">{{ $value->class_name }}</div>
-                        <div class="col-md-3">{{ $value->class_from }}</div>
+                        <div class="col-md-3">{{ date('m-d-Y', strtotime($value->class_from)) }}</div>
                         <div class="col-md-3" style="text-align: center">
                             <div class="col-md-6"><a href="{{ route('classes.edit', $value->id) }}"><button type="button" class="btn btn-priamry">Edit</button></a></div> 
                             <div class="col-md-6"><a href="/classes/{{ $value->id }}"><button type="button" class="btn btn-priamry">View</button></a></div>                            
@@ -38,15 +38,5 @@
     </div>
 </div>
 <!-- Footer -->
-<footer class="text-center">
-    <div class="footer-below">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    Copyright © The Low Country Bridge Connection 2017
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+
 @endsection

@@ -1,4 +1,4 @@
-@extends('layouts.manage_app')
+@extends('layouts.unitadmin')
 
 @section('content')
 
@@ -21,14 +21,7 @@
                         <div class="col-md-4 showdata">Class Description :</div>
                         <div class="col-md-6">{{ $classes->class_description}}</div>
                     </div>
-                    <div class="row" style="margin-bottom: 10px;">
-                        <div class="col-md-4 showdata">Starts Date :</div>
-                        <div class="col-md-6">{{ $classes->class_from}}</div>
-                    </div>
-                    <div class="row" style="margin-bottom: 10px;">
-                        <div class="col-md-4 showdata">End Date :</div>
-                        <div class="col-md-6">{{ $classes->class_till}}</div>
-                    </div>
+                   
                     <div class="row" style="margin-bottom: 10px;">
                         <div class="col-md-4 showdata">Class Size :</div>
                         <div class="col-md-6">{{ $classes->class_size}}</div>
@@ -49,15 +42,5 @@
     </div>
 </div>
 <!-- Footer -->
-<footer class="text-center">
-    <div class="footer-below">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    Copyright © The Low Country Bridge Connection 2017
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+
 @endsection

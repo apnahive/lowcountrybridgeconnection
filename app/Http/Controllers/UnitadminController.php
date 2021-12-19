@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Teacher;
 use App\Manager;
 use Hash;
+use App\Club;
+use App\Unitadmin;
 
 class UnitadminController extends Controller
 {
@@ -41,11 +43,13 @@ class UnitadminController extends Controller
      */
     public function create()
     {
-        return view('unitadmins.create'); 
+        $clubs = Club::all();  
+        return view('unitadmins.create', compact('clubs')); 
     }
     public function create1()
     {
-        return view('unitadmins.createm'); 
+        $clubs = Club::all();  
+        return view('unitadmins.createm', compact('clubs')); 
     }
 
     /**
@@ -61,6 +65,7 @@ class UnitadminController extends Controller
             'name'=> 'required|max:255',
             'email' => 'required|string|email|max:255|unique:users', 
             'password' => 'required|string|min:6'
+
         ));
 
         //store in database
@@ -70,11 +75,12 @@ class UnitadminController extends Controller
         $teacher->name = $request->name;
         $teacher->email = $request->email;
         $teacher->password = Hash::make($request->password);
+        //$teacher->club_id = $request->club_name;
 
         $teacher->save();
 
         //redirect to other page
-        return redirect()->route('unitadmins.index')->with('success','You have sucessfully created a teacher');
+        return redirect()->route('unitadmins.index')->with('success','You have successfully created a teacher');
 
     }
     public function store1(Request $request)
@@ -94,11 +100,12 @@ class UnitadminController extends Controller
         $manager->name = $request->name;
         $manager->email = $request->email;
         $manager->password = Hash::make($request->password);
+        $manager->club_id = $request->club_name;
 
         $manager->save();
 
         //redirect to other page
-        return redirect()->route('unitadmins.index')->with('success','You have sucessfully created a manager');
+        return redirect()->route('unitadmins.index')->with('success','You have successfully created a manager');
 
 
     }
@@ -111,7 +118,7 @@ class UnitadminController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('unitadmins.show');
     }
 
     /**
@@ -122,7 +129,8 @@ class UnitadminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $unitadmin = Unitadmin::findOrFail($id);     
+        return view('unitadmins.edit', ['unitadmin' => $unitadmin]); 
     }
 
     /**
@@ -134,7 +142,35 @@ class UnitadminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //dd(request()->all());
+        if ($request->input('name'))
+        {
+          $this->validate($request, array(
+           'name'=> 'required|max:255',            
+            ));
+          $unitadmin = Unitadmin::findOrFail($id);
+          $unitadmin->name = $request->input('name');
+          $unitadmin->save();
+        }
+        else {
+             $this->validate($request, array(           
+               'old_password' => 'required|string|min:6',
+               'new_password' => 'required|string|min:6',
+               'password_confirmation' => 'required|string|same:new_password',
+            ));
+
+            $unitadmin = Unitadmin::findOrFail($id);
+            $old_password = $request->old_password;
+            $cpassword = $unitadmin->password;
+            if (Hash::check($old_password, $cpassword)) {
+                //store in database
+                $unitadmin->password = Hash::make($request->new_password);
+                $unitadmin->save();
+              }
+        }    
+
+        //redirect to other page
+        return redirect()->route('unitadmins.index')->with('success','You have successfully updated unitadmin details'); 
     }
 
     /**

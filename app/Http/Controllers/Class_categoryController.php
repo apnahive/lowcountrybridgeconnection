@@ -12,6 +12,12 @@ class Class_categoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth:unitadmin');
+    }
+
     public function index()
     {
         $categories = Class_category::all();  
@@ -111,5 +117,8 @@ class Class_categoryController extends Controller
     public function destroy($id)
     {
         //
+        $category = Class_category::find($id)->delete();
+        //$clubs->delete();
+        return redirect()->route('categories.index')->with('success','You have successfully deleted club');
     }
 }

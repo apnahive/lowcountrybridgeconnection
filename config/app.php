@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://www.lowcountrybridgeconnection.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -103,7 +103,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key' => env('APP_KEY' , 'base64:iPNGmV+rhpdXP1lWybsDDmJ3fdPNBujD2QkwxbGJjIY='),
 
     'cipher' => 'AES-256-CBC',
 
@@ -162,7 +162,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        Maatwebsite\Excel\ExcelServiceProvider::class,        
         /*
          * Package Service Providers...
          */
@@ -176,6 +176,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Jrean\UserVerification\UserVerificationServiceProvider::class,
+
+        'Intervention\Image\ImageServiceProvider',
 
     ],
 
@@ -225,7 +228,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,
+        'Image' => 'Intervention\Image\Facades\Image'
+        
     ],
 
 ];

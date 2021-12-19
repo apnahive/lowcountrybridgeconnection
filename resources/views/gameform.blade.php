@@ -42,7 +42,7 @@
                             <label for="from_date" class="col-md-4 control-label">From Date</label>
 
                             <div class="col-md-6">
-                                <input id="from_date" type="date" class="form-control" name="from_date" value="{{ old('from_date') }}" required autofocus>
+                                <input id="from_date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" name="from_date" value="{{ old('from_date') }}" required autofocus>
 
                                 @if ($errors->has('from_date'))
                                     <span class="help-block">
@@ -56,7 +56,7 @@
                             <label for="till_date" class="col-md-4 control-label">Till Date</label>
 
                             <div class="col-md-6">
-                                <input id="till_date" type="date" class="form-control" name="till_date" value="{{ old('till_date') }}" required autofocus>
+                                <input id="till_date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" name="till_date" value="{{ old('till_date') }}" required autofocus>
 
                                 @if ($errors->has('till_date'))
                                     <span class="help-block">

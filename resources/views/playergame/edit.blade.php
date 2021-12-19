@@ -1,4 +1,4 @@
-@extends('layouts.manage_app')
+@extends('layouts.manager_app')
 
 @section('content')
 
@@ -15,10 +15,9 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                         <div class="form-group">
-                            <label for="class_name" class="col-md-4 control-label">Player Name</label>
+                            <label for="player_name" class="col-md-4 control-label">Player Name</label>
                             <div class="col-md-6">
-                                <label for="class_name" class="control-label"> {{ $players->firstname }} </label>
-                                <label for="class_name" class="control-label"> {{ $players->lastname }} </label>
+                                <label for="player_name" class="control-label"> {{ $players->name }} </label>
                             </div>
                         </div>
 
@@ -59,15 +58,5 @@
     </div>
 </div>
 <!-- Footer -->
-<footer class="text-center">
-    <div class="footer-below">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    Copyright © The Low Country Bridge Connection 2017
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+
 @endsection

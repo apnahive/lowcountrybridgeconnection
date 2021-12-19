@@ -7,6 +7,17 @@ use Illuminate\Support\Facades\DB;
 use App\Classroom;
 use App\Class_category;
 use Illuminate\Support\Facades\Auth;
+use App\Teacher;
+use App\Class_series;
+use App\Class_flyer;
+use App\Series_class;
+use View;
+use App\Class_subscription;
+use App\Waitlist_subscription;
+use DateTime; 
+use Image;
+use File;
+use Illuminate\Support\Facades\Storage;
 
 
 class ClassroomController extends Controller
@@ -25,8 +36,11 @@ class ClassroomController extends Controller
     public function index()
     {
         //$clubs = DB::table('clubs')->get();
-        //view('classin',  ['clubs' => $clubs]); 
-       $classes = Classroom::all();  
+        //view('classin',  ['clubs' => $clubs]);
+        $id1 = Auth::id();
+        $teacher = Teacher::find($id1); 
+       $classes = Classroom::where('teacher_id', '=', $id1)->get();
+       $series = Class_series::all();
        return view('classes.index', compact('classes'));
 
         //return view('classes.index')->with('classes', $classes);
@@ -40,9 +54,19 @@ class ClassroomController extends Controller
      */
     public function create()
     {
-         $clubs = DB::table('clubs')->get();
-         $categories = Class_category::all();
-        return view('classes.create',  ['clubs' => $clubs],  ['categories' => $categories]); 
+        $clubs = DB::table('clubs')->get();
+        //$categories = Class_category::all();
+        //$id1 = Auth::id();
+        //$teacher = Teacher::find($id1); 
+        $series = Class_series::all();
+        //where('teacher_id', '=', $teacher->id)->get();
+        return view('classes.create', compact('clubs'));  
+    }
+    public function creates($id)
+    {
+        $series = $id;
+        $clubs = DB::table('clubs')->get();
+        return view('classes.creates', compact('clubs', 'series'));  
     }
 
     /**
@@ -56,41 +80,120 @@ class ClassroomController extends Controller
         //dd(request()->all());
         //validate the data
         $this->validate($request, array(
-            'class_name'=> 'required|max:255',            
-            'club_name'=> 'required|max:255',
+            'class_name'=> 'required|max:20',                        
             'class_description'=> 'required|max:1024',
-            'class_from'=> 'required|date|before_or_equal:class_till',
-            'class_till'=> 'required|date|after_or_equal:class_from',
+            'class_from'=> 'required|date|after:today',
+            //'class_till'=> 'required|date|after_or_equal:class_from',
+            'club'=> 'numeric|min:1',
             'class_size'=> 'numeric|min:2|max:200',
             'payment_option'=> 'required|max:255',
-            'class_flyer_address'=> 'required|max:255',
-            'category_name' => 'required|max:255'
+            'class_flyer_address' => 'sometimes|required|mimes:pdf|max:8192'
+            
         ));
 
         //store in database
         $class = new Classroom;
 
         $class->class_name = $request->class_name;
-        $class->club_name = $request->club_name;
-        $class->category_name = $request->category_name;
+        $class->club_name = "";        
         $class->class_from = $request->class_from;
-        $class->class_till = $request->class_till;
+        if($request->class_till)
+        {
+            $class->class_till = $request->class_till;    
+        }
+        else
+        {
+            $t = strtotime($request->class_from);
+            $class->class_till = date('Y-m-d', strtotime('+10 years', $t));
+            //dd($class->class_till);
+        }
         $class->class_size = $request->class_size;
         $class->payment_option = $request->payment_option;
-        $class->class_flyer_address = $request->class_flyer_address;
-        $class->class_description = $request->class_description;
-        $class->club_id = "2";
+        //$class->class_flyer_address = $request->class_flyer_address;
+        $class->class_description = $request->class_description;        
         $class->classroom_id = uniqid('cr',true);
         $id1 = Auth::id();
-        $class->teacher_id = $id1;
+        $teacher = Teacher::find($id1);
+        $class->teacher_id = $teacher->id;
+
+        $class->club_id = $request->club;
         $class->class_status = true;
+        $class->class_type = $request->class_type;
+        if($request->series_name === 'Choose...')
+        {}
+        else
+        {    
+            $class->series_id = $request->series_name;
+        }    
+        $class->fee_amount = $request->fee_amount;
+        $class->start_time = $request->start_time;
         
         $class->seats_available = $request->class_size;
         $class->seats_booked = 0;
+
         $class->save();
 
+        //dd($class);
+
+        //new class flyer code
+        if($request->class_flyer_address)
+        {
+          $flyer = new Class_flyer;
+
+          $image = $request->file('class_flyer_address');
+          $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+
+          
+          $flyer->class_id = $class->id;
+          $flyer->flyer = $input['imagename'];
+          $flyer->save();  
+          $destinationPath = storage_path('/flyer/class');
+          //$img = Image::make($image->getRealPath());
+          /*$img->resize(100, 100, function ($constraint) {
+              $constraint->aspectRatio();
+          })->save($destinationPath.'/'.$input['imagename']);*/
+
+          $destinationPath = storage_path('/flyer/class');
+          $image->move($destinationPath, $input['imagename']);
+          
+        }
+        
+
+      //dd($input['imagename']);
+   
+        
+
+        /*$this->postImage->add($input);*/
+
+        
+
+
+
+
+        //dd($class->classroom_id);
+        //add class to series code
+        if($request->series)
+        {
+            $series_sub = new Series_class;
+            $series_sub->series_id = $request->series;
+            $series_sub->classroom_id = $class->classroom_id;
+            $series_sub->subscription_id = uniqid('ss',true);
+            $series_sub->subscription_status = true;
+            $series_sub->save();
+            return redirect()->route('classes.index')->with('error_code', $request->series); 
+        }
+        else
+        {
+            return redirect()->route('classes.index')->with('error_codes', $class->id);
+        }
+
+
         //redirect to other page
-        return redirect()->route('classes.show',$class->id)->with('success','You have sucessfully created the class');
+
+       //$classes = Classroom::where('teacher_id', '=', $id1)->where('class_status', '=', 1)->get();
+        //return View::make('classes.index')->with(['classes' => $classes, 'error_code', 5]);
+       //return redirect()->route('classes.index')->with('error_code', 5);
+        
     }
 
     /**
@@ -102,7 +205,29 @@ class ClassroomController extends Controller
     public function show($id)    
     {
         //$classes as $classkey => $value
-       return view('classes.show', ['classes' => Classroom::findOrFail($id)]);
+      $classes = Classroom::find($id);
+      $classes->payment_option = str_replace('_', ' ', $classes->payment_option);
+      $date1 = new DateTime($classes->class_from);
+      $date2 = new DateTime($classes->class_till);
+      $d = date_diff($date1, $date2);
+      if($d->y == 10)
+      { 
+          $classes->class_till = 'N/A';
+      }
+
+      $fly1 = Class_flyer::where('class_id', $id)->first();
+      if($fly1)
+      {
+        $flyer = $fly1->flyer;
+      }
+      else
+      {
+        //$fly = null;
+        $flyer = null;
+      }
+      //$classes->flyer = $fly->flyer;
+      //dd($classes);
+      return view('classes.show', compact('classes', 'flyer'));
         //
     }
 
@@ -118,9 +243,33 @@ class ClassroomController extends Controller
         //$classes = Classroom::all();
         //$clubs = Club::all(); 
         $classes = Classroom::find($id);
+
+        $date1 = new DateTime($classes->class_from);
+        $date2 = new DateTime($classes->class_till);
+        $d = date_diff($date1, $date2);
+        if($d->y == 10)
+        { 
+            $classes->class_till = null;
+        }
+
+
         $clubs = DB::table('clubs')->get();
+        $series = Class_series::all();
         $categories = DB::table('class_categories')->get();
-        return view('classes.edit', ['classes' => $classes], ['categories' => $categories, 'clubs' => $clubs]);
+
+        $fly1 = Class_flyer::where('class_id', $id)->first();
+        //$classes->flyer = $fly->flyer;
+        if($fly1)
+        {
+          $flyer = $fly1->flyer;
+        }
+        else
+        {
+          //$fly = null;
+          $flyer = null;
+        }
+
+        return view('classes.edit', compact('classes', 'categories', 'clubs', 'series', 'flyer'));
         //
     }
 
@@ -134,37 +283,93 @@ class ClassroomController extends Controller
     public function update(Request $request, $id)
     {
         
-        //
+          //dd(request()->all());
           //validate the data
         $this->validate($request, array(
-            'class_name'=> 'required|max:255',            
-            'club_name'=> 'required|max:255',
-            'class_from'=> 'required|date|before_or_equal:class_till',
-            'class_till'=> 'required|date|after_or_equal:class_from',
+            'class_name'=> 'required|max:20',
+            'class_from'=> 'required|date|after:today',
+            //'class_till'=> 'sometimes|date|after:today',
             'class_size'=> 'numeric|min:2|max:200',
-            'payment_option'=> 'required|max:255',
-            'class_flyer_address'=> 'required|max:255',
-            'category_name' => 'required|max:255'
+            'payment_option'=> 'required|max:255',            
+            'fee_amount' =>  'required|max:255',
+            'class_flyer_address' => 'sometimes|required|mimes:pdf|max:8192'
         ));
 
         //store in database
         $class = Classroom::find($id);
 
         $class->class_name = $request->input('class_name');
-        $class->club_name = $request->input('club_name');
+        $class->club_name = "a";
         $class->class_from = $request->input('class_from');
-        $class->class_till = $request->input('class_till');
+
+        if($request->input('class_till') > $request->input('class_from'))
+        {
+            $class->class_till = $request->class_till;    
+        }
+        else
+        {
+            $t = strtotime($request->input('class_from'));
+            $class->class_till = date('Y-m-d', strtotime('+10 years', $t));            
+        }
+
         $class->class_size = $request->input('class_size');
         $class->payment_option = $request->input('payment_option');
-        $class->class_flyer_address = $request->input('class_flyer_address');
+        //$class->class_flyer_address = $request->input('class_flyer_address');
         $class->class_description = $request->input('class_description');
-        $class->category_name = $request->category_name;
+        $class->club_id = $request->club;
+        /*$class->class_type = $request->class_type;
+        $class->series_id = $request->series_name;*/
+        $class->fee_amount = $request->fee_amount;
+        $class->start_time = $request->start_time;
         
 
         $class->save();
 
+        if($request->class_flyer_address)
+        {
+
+          /*$this->validate($request, array(
+              'image' => 'sometimes|required|mimes:pdf,zip|max:2048'
+          ));*/
+          
+          //dd('flyer entered');
+          $flyer = Class_flyer::where('class_id', $id)->first();
+
+          if($flyer == null)
+          {
+            //dd('new flyer is required');
+            $flyer = new Class_flyer;
+            $flyer->class_id = $id;
+          }
+          else
+          {
+            $file = $flyer->flyer;
+            unlink(storage_path('flyer/class/'.$file));
+          }
+
+          $image = $request->file('class_flyer_address');
+          
+          //dd($image, $request->class_flyer_address);
+          $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+
+          
+          //$flyer->class_id = $class->id;
+          $flyer->flyer = $input['imagename'];
+          $flyer->save();  
+          $destinationPath = storage_path('/flyer/class');
+          /*$img = Image::make($image->getRealPath());
+          $img->resize(100, 100, function ($constraint) {
+              $constraint->aspectRatio();
+          })->save($destinationPath.'/'.$input['imagename']);*/
+
+          $destinationPath = storage_path('/flyer/class');
+          //dd($destinationPath);
+          $image->move($destinationPath, $input['imagename']);
+          
+        }
+
         //redirect to other page
-        return redirect()->route('classes.show',$class->id)->with('success','You have sucessfully updated the class');
+        return redirect()->route('classes.show',$class->id)->with('success','You have successfully updated the class');
     }
 
     /**
@@ -175,6 +380,33 @@ class ClassroomController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //dd('delete is hitted');
+        $class = Classroom::find($id);
+        $class_sub = Class_subscription::where('classroom_id', $class->classroom_id);
+        $wait = Waitlist_subscription::where('classroom_id', $class->classroom_id);
+        $series_class = Series_class::where('classroom_id', $class->classroom_id);
+        $series_class->delete();
+        $class_sub->delete();
+        $wait->delete();
+        $class->delete();
+        return redirect()->route('classes.index')->with('success', 'You have successfully deleted the class');
+    }
+
+    public function delete_flyer($id)
+    {
+      //dd('delete flyer is hitted');
+      $flyer = Class_flyer::where('class_id', $id);
+      $flyer1 = Class_flyer::where('class_id', $id)->first();
+      
+      $file = $flyer1->flyer;
+
+      //File::delete('storage/flyer/class/'.$file);
+      unlink(storage_path('flyer/class/'.$file));
+      
+      //Storage::delete('flyer/class/'.$file);
+      //dd($file);
+      $flyer->delete();
+      return redirect()->route('classes.edit', $id)->with('success', 'You have successfully removed the Flyer');
+
     }
 }

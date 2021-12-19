@@ -11,5 +11,7 @@ class Classroom extends Authenticatable
    // protected $gurad = 'superadmin';
 	 protected $guard = 'teacher';
 
+	
+
 	  protected $fillable = ['class_name', 'seats_booked', 'seats_available'];
 }

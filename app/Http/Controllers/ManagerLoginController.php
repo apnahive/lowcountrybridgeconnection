@@ -28,7 +28,8 @@ class ManagerLoginController extends Controller
         return redirect()->intended(route('manager.index'));
         }
     	//if successful, then redirect to dashboard
-        return redirect()->back()->withInput($request->only('email', 'remember'));
+        return redirect()->back()->with('error','Please check email/password and try again');
+        //return redirect()->back()->withInput($request->only('email', 'remember'));
     	//if unsuccessful, then reedirect back to login page
     }
 }

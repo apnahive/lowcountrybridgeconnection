@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Teacher;
 use App\Manager;
 use App\Player;
+use App\User;
 
 class PlayerController extends Controller
 {
@@ -24,8 +25,35 @@ class PlayerController extends Controller
     public function index()
     {
         //
-        $players = Player::all();
-        return view('players.index', compact('players'));
+        
+        //$users = User::select('id', 'name', 'lastname', 'email');
+        //$players = Player::select('id', 'name', 'lastname', 'email')->unionAll($users);
+        //$players->paginate(10);
+        //$players = union($users);
+        //dd($players);
+        $players = Player::paginate(10);
+        $users = User::paginate(10);
+
+        return view('players.index', compact('players', 'users'));
+    }
+    public function search(Request $request)
+    {
+        //dd(request()->all());
+        $search = $request->q;
+
+        if($request->q == '')
+        {
+            //dd('blank found');
+            $players = null;
+            $users = null;
+        }
+        else
+        {
+            $players = Player::where('name', 'like', '%'.$search.'%')->orWhere('lastname', 'like', '%'.$search.'%')->orWhere('email', 'like', '%'.$search.'%')->get();
+            $users = User::where('name', 'like', '%'.$search.'%')->orWhere('lastname', 'like', '%'.$search.'%')->orWhere('email', 'like', '%'.$search.'%')->get();    
+        }
+        
+        return view('players.search', compact('players', 'users'));
     }
 
     /**
@@ -49,38 +77,44 @@ class PlayerController extends Controller
     {
         //dd(request()->all());
         $this->validate($request, array(
-            'firstname'=> 'required|max:255',
+            'name'=> 'required|max:255',
             'lastname'=> 'required|max:255',
-            'email' => 'email|max:255|unique:users'
+            'email' => 'nullable|email|max:255|unique:users' 
             //'password' => 'required|string|min:6|confirmed'
         ));
+        $bool1 = true;
+        $players = Player::all();
+        foreach ($players as $playerkey => $player) {
+            if($request->email == $player->email)
+            {
+                $bool1 = false;
+                return redirect()->route('manage_students.index')->with('error','This email is already registered as member or student/player in our system. Please use another email');
+            }
+        }
         $players = new Player;
-        $players->firstname = $request->firstname;
+        $players->name = $request->name;
         $players->lastname = $request->lastname;
         $players->email = $request->email;
+        $players->mailing_options = $request->mailing_options;
         
 
         $user = Auth::user();        
-        $teacher = Teacher::findOrFail($user);
-        $manager = Manager::findOrFail($user);
+        $teacher = Teacher::findOrFail($user)->first();        
         if($teacher)
         {
             $players->user_id = $teacher->id;
             $players->added_by_teacher = 1;
             $players->added_by_manager = 0;
-        }
-        elseif ($manager) 
-        {
-            $players->user_id = $manager->id;
-            $players->added_by_teacher = 0;
-            $players->added_by_manager = 1;   
-        }
+            $players->added_by_unitadmin = 0;
+            $players->added_by_superadmin = 0;   
+            $players->update_code = "C";
+        }        
         else
         {
-            return redirect()->route('players.index')->with('error','Details not saved');            
+            return redirect()->route('manage_students.index')->with('error','Details not saved');            
         }       
         $players->save();
-        return redirect()->route('players.index')->with('success','You have sucessfully added a player');        
+        return redirect()->route('manage_students.index')->with('success','You have successfully added a player');        
     }    
 
     /**
@@ -119,17 +153,16 @@ class PlayerController extends Controller
     {
         //
          $this->validate($request, array(
-            'firstname'=> 'required|max:255',
-            'lastname'=> 'required|max:255',
-            'email' => 'email|max:255|unique:users'
+            'name'=> 'required|max:255',
+            'lastname'=> 'required|max:255'            
             //'password' => 'required|string|min:6|confirmed'
-        ));
+        ));        
         $players = Player::find($id);
-        $players->firstname = $request->firstname;
+        $players->name = $request->name;
         $players->lastname = $request->lastname;
-        $players->email = $request->email;
+        //$players->email = $request->email;
         $players->save();
-        return redirect()->route('players.index')->with('success','You have sucessfully updated a player');
+        return redirect()->route('manage_students.index')->with('success','You have successfully updated a player');
     }
 
     /**

@@ -4,46 +4,98 @@
 
 <div class="container" style="margin-top: 60px;">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <a href="{{ route('teacher.index') }}"><button type="button" class="btn btn-lg btn-info">Back</button></a>
-            <a href="{{ route('players.index') }}" class="pull-right"><button type="button" class="btn btn-lg btn-info pull-right">Add a new Player</button></a>
+        <div class="col-md-10 col-md-offset-1">
+            
+            <div class="row" style="display: flex;">
+            <div class="col-md-2 wcol-md-2"><a href="{{ URL::previous() }}"><button type="button" class="btn btn-lg btn-info">Back</button></a></div>
+            <div class="col-md-7 wcol-md-7"> 
+            <form action="{!! route('manage_student.search') !!}" method="POST" role="search" class="search-des">
+                {{ csrf_field() }}
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q"
+                        placeholder="Search Students"> <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </form>
+            </div>
+
+            <div class="col-md-3  wcol-md-3"><a href="{{ route('manage_students.create') }}" class="pull-right"><button type="button" class="btn btn-lg btn-info pull-right">Add New Student</button></a></div>             
+            </div>
+            <div class="col-md-12 search-mob" style="margin-top: 26px;"> 
+            <form action="{!! route('manage_student.search') !!}" method="POST" role="search">
+                {{ csrf_field() }}
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q"
+                        placeholder="Search Students"> <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </form>
+            </div>
             <div class="panel panel-default" style="margin-top: 30px;">
                 <div class="panel-heading">Available Players</div>
                 <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-2">#</div>
-                        <div class="col-md-3">Player Name</div>
-                        <div class="col-md-3"></div>
-                        <div class="col-md-3" style="text-align: center;">
-                            Add to Class                             
+                    <div class="row" style="display: flex;">
+                       <!--  <div class="col-md-1"></div> -->
+                        <div class="col-md-4 wcol-md-4">
+                            Name
+                        </div>
+                        <div class="col-md-8 wcol-md-8" style="text-align: center">
+                            <div class="col-md-6">Email/ACBL</div>
+                            <div class="col-md-6" style="text-align: center;">                            
+                                    Add to                            
+                            </div>
                         </div>
                     </div>
+                    <hr class="mobline">
                     @foreach ($players as $playerkey => $value) 
-                    <div class="row" style="margin-top: 15px;">
-                        <div class="col-md-2">{{ $value->id }}</div>
-                        <div class="col-md-3">{{ $value->firstname }}</div>
-                        <div class="col-md-3">{{ $value->lastname }}</div>
-                        <div class="col-md-3" style="text-align: center">
-                            <a href="{{ route('playerclass.edit', $value->id) }}"><button type="button" class="btn btn-priamry">Add to Class</button></a>
+                    <div class="row" style="margin-top: 15px;display: flex;">
+                        <!-- <div class="col-md-1">{{ $value->id }}</div> -->
+                        <div class="col-md-4 wcol-md-4">
+                            {{ $value->name }} {{ $value->lastname }}
                         </div>
-                    </div>                                        
+                        <div class="col-md-8 wcol-md-8" style="text-align: center">
+                            <div class="col-md-6" style="word-wrap: break-word;">{{ $value->email }} <br> {{ $value->acbl }} </div>
+                            <div class="col-md-6" style="text-align: center">                            
+                                    <a href="{{ route('playerclass.add', $value->id) }}"><button type="button" class="btn btn-priamry">Series/Class</button></a>                            
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mobline">                                        
+                    @endforeach
+                    @foreach ($users as $userkey => $value1) 
+                    <div class="row" style="margin-top: 15px;display: flex;">
+                        <!-- <div class="col-md-1">{{ $value1->id }}</div> -->
+                        <div class="col-md-4 wcol-md-4">
+                            {{ $value1->name }} {{ $value1->lastname }}
+                        </div>
+                        <div class="col-md-8 wcol-md-8" style="text-align: center">
+                            <div class="col-md-6" style="word-wrap: break-word;">{{ $value1->email }} <br> {{ $value->acbl }} </div>
+                            <div class="col-md-6" style="text-align: center">                            
+                                    <a href="{{ route('userclass.add', $value1->id) }}"><button type="button" class="btn btn-priamry">Series/Class</button></a>                            
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mobline">                                        
                     @endforeach                   
                     
                 </div>
+            </div>
+            <div class="col-md-12">  
+                @if($players->total() > $users->total())
+                    {!! $players->render() !!}
+                @else
+                    {!! $users->render() !!}
+                @endif  
             </div>
         </div>
     </div>
 </div>
 <!-- Footer -->
-<footer class="text-center">
-    <div class="footer-below">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    Copyright © The Low Country Bridge Connection 2017
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+
 @endsection

@@ -1,67 +1,185 @@
-@extends('layouts.manage_app')
+@extends('layouts.app')
 
 @section('content')
 
-<div class="container" style="margin-top: 60px;">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2" style="margin-bottom: 30px;">
-            <a href="{{ URL::previous() }}"><button type="button" class="btn btn-lg btn-info">Back</button></a>  
 
-
-            <div class="panel panel-default" style="margin-top: 30px;">
-
-            <form class="form-horizontal" role="form" method="POST" action="{!! route('enroll.update', $games['id']) !!}">
-                        <input type="hidden" name="_method" value="PUT">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-                <div class="panel-heading">Game Details</div>
-                <div class="panel-body" style="font-size: 19px;">               
-                    <div class="row" style="margin-bottom: 10px;">
-                        <div class="col-md-4 showdata">Game Name :</div>
-                        <div class="col-md-6">{{ $games->game_name}}</div>
-                    </div>
-                    <div class="row" style="margin-bottom: 10px;">
-                        <div class="col-md-4 showdata">Club Name :</div>
-                        <div class="col-md-6">{{ $games->club_name}}</div>
-                    </div>
-                    <div class="row" style="margin-bottom: 10px;">
-                        <div class="col-md-4 showdata">Game Description :</div>
-                        <div class="col-md-6">{{ $games->game_description}}</div>
-                    </div>
-                    <div class="row" style="margin-bottom: 10px;">
-                        <div class="col-md-4 showdata">Game Date :</div>
-                        <div class="col-md-6">{{ $games->game_date}}</div>
-                    </div>                    
-                    <div class="row" style="margin-bottom: 10px;">
-                        <div class="col-md-4 showdata">Team Size :</div>
-                        <div class="col-md-6">{{ $games->team_size}}</div>
-                    </div>                                        
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary pull-right">
-                                Enroll Now
-                            </button>
-
-                            
-                        </div>
-                    </div>
-                    
-                </div>                
+<div class="row full1">
+    <div class="mid-section">
+        <div class="col-md-12"><img src="/img/game.png" style="margin-top: 22px;width: 100%"></div>
+        <div class="col-md-12" style="margin-top: 72px;border: 1px black solid;text-align: left;">
+            <div class="row bottom-table">
+                <div class="col-md-4 table-space" style="font-weight: 600;">Game Name</div>
+                <div class="col-md-8 table-space left-table">{{ $games->game_name}}</div>
             </div>
-           
+            <div class="row bottom-table">
+                <div class="col-md-4 table-space" style="font-weight: 600;">Game Description</div>
+                <div class="col-md-8 table-space left-table">{{ $games->game_description}}</div>
+            </div>
+            <div class="row bottom-table">
+                <div class="col-md-4 table-space" style="font-weight: 600;">Game Date</div>
+                <div class="col-md-8 table-space left-table">{{ date('m-d-Y', strtotime($games->game_date)) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 table-space" style="font-weight: 600;">Team Size</div>
+                <div class="col-md-8 table-space left-table">{{ $games->team_size}}</div>
+            </div>
+        </div>
+
+        <div class="col-md-12 buttonbox1" style="margin-top: 72px;margin-bottom: 72px;">
+            <div class="col-md-6 wcol-md-6 listclass button-top" style="text-align: left;">
+                <a href="{{ URL::previous() }}">
+                    <button class="btn btn-primary silver">Back</button>
+                </a>
+            </div>
+            <!-- <div class="col-md-4" style="text-align: center;">
+                <a href="">
+                    <button class="btn btn-primary silver">View Flyer</button>
+                </a>
+            </div> -->
+            <div class="col-md-6 wcol-md-6 listclass button-top" style="text-align: right;">
+                
+                        @if ($games->seats_available>0)
+                            @if ( $games->team_size == 1 )
+                                <form class="form-horizontal" role="form" method="POST" action="{!! route('game_enrollment.update', $games['id']) !!}">
+                                <input type="hidden" name="_method" value="PUT">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">                                
+                                <button type="submit" class="btn btn-primary silver">Enroll Now</button>
+                                </form>
+                            @elseif ( $games->team_size == 2 )                                
+                                <button type="button" class="btn btn-priamry silver" data-toggle="modal" data-target="#confirm2">Enroll Now</button>
+                            @elseif ( $games->team_size == 4 )                                
+                                <button type="button" class="btn btn-priamry silver" data-toggle="modal" data-target="#confirm4">Enroll Now</button>
+                            @endif   
+                        @else              
+                                <div class="col-md-12">
+                                <p class="pull-right" style="font-size: 14px;">Seats are full</p></div>
+                                <form class="form-horizontal" role="form" method="POST" action="{!! route('game_enrollment.update', $games['id']) !!}">
+                                <input type="hidden" name="_method" value="PUT">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <div class="col-md-12"><button type="submit" class="btn btn-primary pull-right">
+                                    Join waiting list
+                                </button></div> 
+                                </form>
+
+                        @endif               
+            </div>
         </div>
     </div>
 </div>
-<!-- Footer -->
-<footer class="text-center">
-    <div class="footer-below">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    Copyright © The Low Country Bridge Connection 2017
+
+
+
+<!--  for two players  -->
+
+<div class="modal fade" id="confirm2" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="text-align: left;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add players</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" method="POST" action="{!! route('game_enrollment.update', $games['id']) !!}">
+            <input type="hidden" name="_method" value="PUT">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <div class="form-group{{ $errors->has('second_player') ? ' has-error' : '' }}">
+                <label for="second_player" class="col-md-4 control-label">Second player Name</label>
+
+                <div class="col-md-6">
+                    <input id="second_player" type="text" class="form-control" name="second_player" value="{{ old('second_player') }}" required autofocus>
+
+                    @if ($errors->has('second_player'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('second_player') }}</strong>
+                        </span>
+                    @endif
                 </div>
             </div>
-        </div>
+        
+            <div class="form-group">
+                <div class="col-md-8 col-md-offset-4">
+                    <button type="submit" class="btn btn-primary">
+                        Enroll Now
+                    </button>
+                </div>
+            </div>
+        </form>
+      </div>
+      
     </div>
-</footer>
+  </div>
+</div>
+
+<div class="modal fade" id="confirm4" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="text-align: left;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add players</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" method="POST" action="{!! route('game_enrollment.update', $games['id']) !!}">
+            <input type="hidden" name="_method" value="PUT">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <div class="form-group{{ $errors->has('second_player') ? ' has-error' : '' }}">
+                <label for="second_player" class="col-md-4 control-label">Second player Name</label>
+
+                <div class="col-md-6">
+                    <input id="second_player" type="text" class="form-control" name="second_player" value="{{ old('second_player') }}" required autofocus>
+
+                    @if ($errors->has('second_player'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('second_player') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+            <div class="form-group{{ $errors->has('third_player') ? ' has-error' : '' }}">
+                <label for="third_player" class="col-md-4 control-label">Third player Name</label>
+
+                <div class="col-md-6">
+                    <input id="third_player" type="text" class="form-control" name="third_player" value="{{ old('third_player') }}" required autofocus>
+
+                    @if ($errors->has('third_player'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('third_player') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+            <div class="form-group{{ $errors->has('forth_player') ? ' has-error' : '' }}">
+                <label for="forth_player" class="col-md-4 control-label">Forth player Name</label>
+
+                <div class="col-md-6">
+                    <input id="forth_player" type="text" class="form-control" name="forth_player" value="{{ old('forth_player') }}" required autofocus>
+
+                    @if ($errors->has('forth_player'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('forth_player') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <div class="col-md-8 col-md-offset-4">
+                    <button type="submit" class="btn btn-primary">
+                        Enroll Now
+                    </button>
+                </div>
+            </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
 @endsection

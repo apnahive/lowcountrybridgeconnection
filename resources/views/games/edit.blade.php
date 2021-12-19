@@ -5,7 +5,7 @@
 <div class="container" style="margin-top: 60px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <a href="{{ URL::previous() }}"><button type="button" class="btn btn-lg btn-info">Back</button></a>            
+            <a href="{{ route('games.index') }}"><button type="button" class="btn btn-lg btn-info">Back</button></a>            
             <div class="panel panel-default" style="margin-top: 30px;">
                 <div class="panel-heading">Edit Game</div>
                 <div class="panel-body">
@@ -40,35 +40,48 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('club_name') ? ' has-error' : '' }}">
-                            <label for="club_name" class="col-md-4 control-label">Club Name</label>
+                        <!-- <div class="form-group{{ $errors->has('club') ? ' has-error' : '' }}" id="club">
+                            <label for="club" class="col-md-4 control-label">Club Name</label>
 
                             <div class="col-md-6">
                                 <div class="form-group" style="margin: 0;">                                    
-                                    <select class="custom-select form-control" id="club_name" name="club_name">
-                                      <option selected>{{$games->club_name}}</option>
+                                    <select class="custom-select form-control" id="club" name="club">
+                                      <option selected>Choose...</option>
                                         @foreach ($clubs as $club) 
-                                            <option value="{{$club->club_name}}">{{$club->club_name}}</h1>
+                                            <h1><option value="{{$club->id}}">{{$club->club_name}}</h1>
                                         @endforeach                                      
                                     </select>
                                 </div>
-                                @if ($errors->has('club_name'))
+                                @if ($errors->has('club'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('club_name') }}</strong>
+                                        <strong>{{ $errors->first('club') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group{{ $errors->has('game_date') ? ' has-error' : '' }}">
                             <label for="game_date" class="col-md-4 control-label">Game Date</label>
 
                             <div class="col-md-6">
-                                <input id="game_date" type="date" class="form-control" name="game_date" value="{{ $games['game_date'] }}" required autofocus>
+                                <input id="game_date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" name="game_date" value="{{ $games['game_date'] }}" required autofocus>
 
                                 @if ($errors->has('game_date'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('game_date') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('start_time') ? ' has-error' : '' }}">
+                            <label for="start_time" class="col-md-4 control-label">Start Time</label>
+
+                            <div class="col-md-6">
+                                <input type="text" onfocus="(this.type='time')" onblur="(this.type='text')" name="start_time" id="start_time" class="form-control" value="{{ $games['start_time'] }}" required autofocus>                              
+
+                                @if ($errors->has('start_time'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('start_time') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -81,10 +94,9 @@
                             <div class="col-md-6">
                                 <div class="form-group" style="margin: 0;">                                    
                                     <select class="custom-select form-control" id="team_size" name="team_size">
-                                      <option disabled="true">Choose...</option>
-                                      <option value="1">Single</option>
-                                      <option value="2">Two-Person</option>
-                                      <option value="4">Four-Person</option>
+                                      <option value="1" {{ $games['team_size'] === 1 ? 'selected' : '' }}>Single</option>
+                                      <option value="2" {{ $games['team_size'] === 2 ? 'selected' : '' }}>Two-Person</option>
+                                      <option value="4" {{ $games['team_size'] === 4 ? 'selected' : '' }}>Four-Person</option>
                                     </select>
                                  </div>                                  
 
@@ -96,7 +108,22 @@
                             </div>
                         </div>
 
-                        
+                        <!-- <div class="form-group{{ $errors->has('tournament') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label"></label>
+
+                            <div class="checkbox checkbox-inline" style="margin-left: 15px;">
+                                <input type="hidden" name="tournament" value="false">
+                                <input type="checkbox" id="tournament" name="tournament" value="true" style="margin-left: 0;">
+                                <label for="tournament">It is a tournament.</label>
+
+
+                                @if ($errors->has('tournament'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('tournament') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div> -->
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
@@ -114,15 +141,5 @@
     </div>
 </div>
 <!-- Footer -->
-<footer class="text-center">
-    <div class="footer-below">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    Copyright © The Low Country Bridge Connection 2017
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+
 @endsection
